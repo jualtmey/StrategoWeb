@@ -14,3 +14,5 @@ libraryDependencies ++= Seq(
 
 
 fork in run := true
+
+includeFilter in (Assets, LessKeys.less) := "strategoWui.less" | "strategoIndex.less"

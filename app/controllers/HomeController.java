@@ -1,15 +1,14 @@
 package controllers;
 
-import play.mvc.*;
-
-import views.html.*;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import java.util.List;
 
 import de.htwg.stratego.StrategoApp;
 import de.htwg.stratego.aview.tui.TextUI;
 import de.htwg.stratego.controller.IStrategoController;
+import de.htwg.stratego.model.ICell;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.*;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -23,14 +22,19 @@ public class HomeController extends Controller {
      * this method will be called when the application receives a
      * <code>GET</code> request with a path of <code>/</code>.
      */
-    public Result index() {
-        return ok(index.render("Your new application is ready33."));
+    public Result strategoWui(String command) {
+    	IStrategoController controller = StrategoApp.getInstance().getIStrategoController();
+        return ok(strategoWui.render(controller));
     }
     
-    public Result stratego(String command) {
+    public Result strategoTui(String command) {
     	TextUI tui = StrategoApp.getInstance().getTui();
     	tui.processInputLine(command);
     	return ok(tui.printTUI());
+    }
+    
+    public Result strategoIndex() {
+        return ok(strategoIndex.render());
     }
 
 }

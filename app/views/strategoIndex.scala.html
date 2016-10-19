@@ -1,0 +1,87 @@
+@* Indexpage in plain Html and CSS 
+ *@
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Stratego HTWG</title>
+		<link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/strategoIndex.css")">
+	</head>
+	
+	<body>
+		
+			<h1>Welcome to HTWG Stratego!</h1>
+			
+		<div class="def_margin">
+		
+			<h2>Introduction</h2>
+			
+			<p>On this webpage you can play the classic strategy game Stratego. 
+			This game is made by students at the University of Applied Sciences in Konstanz (HTWG) and is basically written in Java.</p>
+			
+			<h2>Rules & Strategies</h2>
+			<h3>Basics</h3>
+			
+			<p>Stratego is a game in which you need to capture the flag of your opponent while defending your own flag. 
+			To capture the flag you use your army of 40 pieces. 
+			Pieces have a rank and represent individual officers and soldiers in an army. 
+			In addition to those ranked pieces you can use bombs to protect your flag.</p>
+			
+			<p>Pieces move 1 square per turn, horizontally or vertically. Only the scout can move over multiple empty squares per turn. 
+			Pieces cannot jump over another piece.</p>
+			
+			<p>If a piece is moved onto a square occupied by an opposing piece, their identities are revealed. 
+			The weaker piece is removed from the board, and the stronger piece is moved into the place formerly occupied by the weaker piece. 
+			If the engaging pieces are of equal rank, they are both removed. Pieces may not move onto a square already occupied by another piece without attacking. 
+			Exception to the rule of the higher rank winning is the spy. When the spy attacks the marshal, the spy defeats the higher ranked marshal. 
+			However, when the marshal attacks the spy, the spy loses. Bombs lose when they are defused by a miner.</p>
+			
+			<p>The bombs and the flag cannot be moved. A bomb defeats every piece that tries to attack it, except the miner. 
+			The flag loses from every other piece. When you capture the flag of your opponent you win the game.</p>
+			
+			<p>The Stratego board consists of 10 x 10 squares. Within the board there are two obstacles of 2 x 2 squares each. Pieces are not allowed to move there.</p>
+			
+			<h3>Ranks</h3>
+			
+			<p>The following pieces are used in Stratego (ranked from low to high):</p>
+			
+			<ul>
+				<li>Flag (1x)</li>
+				<li>Bomb (6x)</li>
+				<li>Spy (1x)</li>
+				<li>Scout (8x)</li>
+				<li>Miner (5x)</li>
+				<li>Sergeant (4x)</li>
+				<li>Lieutenant (4x)</li>
+				<li>Captain (4x)</li>
+				<li>Major (3x)</li>
+				<li>Colonel (2x)</li>
+				<li>General (1x)</li>
+				<li>Marshall (1x)</li>
+			</ul>
+			
+			<h2>Play the Game</h2>
+			
+			Click on the following link to start the game:
+			<a href="game.html">Start Game!</a>
+			
+		</div>
+		
+		<hr>
+		
+		<footer>
+		
+			Fork us on GitHub:
+			<a class="white_link" href="https://github.com/redscarwolf/StrategyGameStratego">Strategy Game Stratego</a>
+			and
+			<a class="white_link" href="https://github.com/redscarwolf/StrategoWeb">Stratego Web</a>
+			<br>
+			See also:
+			<a class="white_link" href="http://www.htwg-konstanz.de">HTWG Konstanz</a>
+		
+		</footer>
+		
+	</body>
+
+</html>

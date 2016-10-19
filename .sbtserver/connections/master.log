@@ -1,13 +1,13 @@
-New log file opened at Thu Oct 06 10:23:42 CEST 2016 by 640@DESKTOP-093DMDB
-Taking next connection to: 5631
-New client attempting to connect on port: 5632-5631
-  Address = /192.168.110.1:5631
-This client on port 5632 has uuid 718f3cd9-6095-4c8c-85f1-9b03dabdcc5e configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-718f3cd9-6095-4c8c-85f1-9b03dabdcc5e
-Taking next connection to: 5631
-New client attempting to connect on port: 5633-5631
-  Address = /192.168.110.1:5631
-Handshake exception on socket: 5633
+New log file opened at Wed Oct 19 17:31:47 CEST 2016 by 21180@DESKTOP-093DMDB
+Taking next connection to: 27249
+New client attempting to connect on port: 27250-27249
+  Address = /192.168.110.1:27249
+This client on port 27250 has uuid 0d987825-9f87-4b27-b9eb-c7de5f768abc configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-0d987825-9f87-4b27-b9eb-c7de5f768abc
+Taking next connection to: 27249
+New client attempting to connect on port: 27251-27249
+  Address = /192.168.110.1:27249
+Handshake exception on socket: 27251
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
@@ -23,15 +23,24 @@ Caused by: java.net.SocketException: Software caused connection abort: recv fail
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 5631
-New client attempting to connect on port: 5634-5631
-  Address = /192.168.110.1:5631
-This client on port 5634 has uuid bcb50cfb-faff-46e8-aa3a-fe167256249d configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-718f3cd9-6095-4c8c-85f1-9b03dabdcc5e, activator-bcb50cfb-faff-46e8-aa3a-fe167256249d
-Taking next connection to: 5631
-New client attempting to connect on port: 5646-5631
-  Address = /192.168.110.1:5631
-Handshake exception on socket: 5646
+Taking next connection to: 27249
+New client attempting to connect on port: 27252-27249
+  Address = /192.168.110.1:27249
+This client on port 27252 has uuid 2caab3c7-e580-4a4f-847c-7b208b5b994f configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-0d987825-9f87-4b27-b9eb-c7de5f768abc, activator-2caab3c7-e580-4a4f-847c-7b208b5b994f
+Taking next connection to: 27249
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 27249
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 27249
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 27249
+New client attempting to connect on port: 27301-27249
+  Address = /192.168.110.1:27249
+Handshake exception on socket: 27301
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
@@ -47,156 +56,39 @@ Caused by: java.net.SocketException: Software caused connection abort: recv fail
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 5631
-New client attempting to connect on port: 5647-5631
-  Address = /192.168.110.1:5631
-This client on port 5647 has uuid a47f6ee3-85e5-45a9-8cc0-211d1d7e1df2 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: activator-bcb50cfb-faff-46e8-aa3a-fe167256249d, play-fork-run-a47f6ee3-85e5-45a9-8cc0-211d1d7e1df2
-Taking next connection to: 5631
+Taking next connection to: 27249
+New client attempting to connect on port: 27302-27249
+  Address = /192.168.110.1:27249
+This client on port 27302 has uuid 12ac297b-d81d-4081-8dcc-d475deeb4fba configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: activator-0d987825-9f87-4b27-b9eb-c7de5f768abc, play-fork-run-12ac297b-d81d-4081-8dcc-d475deeb4fba
+Taking next connection to: 27249
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
+Taking next connection to: 27249
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
+Taking next connection to: 27249
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
+Taking next connection to: 27249
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
+Taking next connection to: 27249
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
+Taking next connection to: 27249
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
+Taking next connection to: 27249
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
+Taking next connection to: 27249
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
+Taking next connection to: 27249
 Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
-New client attempting to connect on port: 5789-5631
-  Address = /192.168.110.1:5631
-Handshake exception on socket: 5789
-sbt.impl.ipc.HandshakeException: Unable to perform handshake
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
-	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
-	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
-Caused by: java.net.SocketException: Software caused connection abort: recv failed
-	at java.net.SocketInputStream.socketRead0(Native Method)
-	at java.net.SocketInputStream.socketRead(Unknown Source)
-	at java.net.SocketInputStream.read(Unknown Source)
-	at java.net.SocketInputStream.read(Unknown Source)
-	at java.io.BufferedInputStream.fill(Unknown Source)
-	at java.io.BufferedInputStream.read(Unknown Source)
-	at java.io.DataInputStream.readInt(Unknown Source)
-	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
-	... 2 more
-Taking next connection to: 5631
-New client attempting to connect on port: 5790-5631
-  Address = /192.168.110.1:5631
-This client on port 5790 has uuid cda37e3c-e81f-4aaa-b7f1-db52205c92bf configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: activator-bcb50cfb-faff-46e8-aa3a-fe167256249d, play-fork-run-cda37e3c-e81f-4aaa-b7f1-db52205c92bf
-Taking next connection to: 5631
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
-New client attempting to connect on port: 6042-5631
-  Address = /192.168.110.1:5631
-Handshake exception on socket: 6042
-sbt.impl.ipc.HandshakeException: Unable to perform handshake
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
-	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
-	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
-Caused by: java.net.SocketException: Software caused connection abort: recv failed
-	at java.net.SocketInputStream.socketRead0(Native Method)
-	at java.net.SocketInputStream.socketRead(Unknown Source)
-	at java.net.SocketInputStream.read(Unknown Source)
-	at java.net.SocketInputStream.read(Unknown Source)
-	at java.io.BufferedInputStream.fill(Unknown Source)
-	at java.io.BufferedInputStream.read(Unknown Source)
-	at java.io.DataInputStream.readInt(Unknown Source)
-	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
-	... 2 more
-Taking next connection to: 5631
-New client attempting to connect on port: 6043-5631
-  Address = /192.168.110.1:5631
-This client on port 6043 has uuid 5fbfd12e-74dc-40fa-9224-056f40c71271 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: activator-bcb50cfb-faff-46e8-aa3a-fe167256249d, play-fork-run-5fbfd12e-74dc-40fa-9224-056f40c71271
-Taking next connection to: 5631
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
-New client attempting to connect on port: 6137-5631
-  Address = /192.168.110.1:5631
-Handshake exception on socket: 6137
-sbt.impl.ipc.HandshakeException: Unable to perform handshake
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
-	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
-	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
-Caused by: java.net.SocketException: Software caused connection abort: recv failed
-	at java.net.SocketInputStream.socketRead0(Native Method)
-	at java.net.SocketInputStream.socketRead(Unknown Source)
-	at java.net.SocketInputStream.read(Unknown Source)
-	at java.net.SocketInputStream.read(Unknown Source)
-	at java.io.BufferedInputStream.fill(Unknown Source)
-	at java.io.BufferedInputStream.read(Unknown Source)
-	at java.io.DataInputStream.readInt(Unknown Source)
-	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
-	... 2 more
-Taking next connection to: 5631
-New client attempting to connect on port: 6138-5631
-  Address = /192.168.110.1:5631
-This client on port 6138 has uuid 3d86b709-bdc7-45cc-b628-60644736acc6 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: activator-bcb50cfb-faff-46e8-aa3a-fe167256249d, play-fork-run-3d86b709-bdc7-45cc-b628-60644736acc6
-Taking next connection to: 5631
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 5631
+No non-daemon clients connected after 3 min. Shutting down.
+Server socket thread exiting.
+0 clients open, will close them...
+All client sockets have been closed.
+Closing the 21180@DESKTOP-093DMDB logs at Wed Oct 19 18:08:59 CEST 2016, goodbye.

@@ -1,0 +1,38 @@
+@cell-size: 4em;
+@border: 0.1em solid rgba(57,128,57,0.4);
+
+.field {
+  display: inline-block;
+  background-image: url("../images/backgroundField2.svg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding: @cell-size * 2;
+}
+
+.innerfield {
+  border-right: @border;
+  border-bottom: @border;
+}
+
+.fieldrow {
+  font-size: 0px; // needed to remove whitegabs, linebreak in html causes this.
+}
+
+.cell {
+  font-size: 16px; //turn back font-size from fieldrow
+  display: inline-block;
+  //background: rgba(83, 255, 175, 0.5);
+  border-left: @border;
+  border-top: @border;
+  //border-radius: 0.4em;
+  width: @cell-size;
+  height: @cell-size;
+}
+
+.figure {
+  //border-radius: 0.4em;
+  //border: 0.12em solid rgba(255, 255, 255, .5);
+  //position: inherit;
+  width: 100%;
+  height: 100%;
+}

@@ -14,20 +14,24 @@
          -->
     </head>
     <body>
+        <div class="selectArea">
+
+        </div>
         <div class="field">
-        @for(row <- 0 until controller.getFieldWidth()) {
-            <div class="fieldrow">
-                @row
-                @for(column <- 0 until controller.getFieldHeight()) {
-                    @column
-                    <div class="cell">
-                        <img class="figure" src="@routes.Assets.versioned("images/00stratego-flag2.svg")"" >
+            <div class="innerfield">
+                @for(row <- 0 until controller.getFieldWidth()) {
+                    <div class="fieldrow">
+                        @for(column <- 0 until controller.getFieldHeight()) {
+                            <span class="cell">
+                                <img class="figure" src="@routes.Assets.versioned("images/00stratego-flag2.svg")"" >
+                            </span>
+                        }
                     </div>
                 }
-                
             </div>
-        }
         </div>
-        
+        <div class="infoArea">
+
+        </div>
     </body>
 </html>

@@ -3,6 +3,36 @@
  *@
 @(controller: de.htwg.stratego.controller.IStrategoController)
 
+@getCellBorder(row:Int, column:Int) = @{
+    var cellName = ""
+    var field = controller.getIField
+    var cell = field.getCell(column, row)
+    
+    if (cell.isPassable()) {
+        cellName = "cellBorder"
+    } else {
+        if (column == 0 || row == 0) {
+            cellName = "cellBorder" // eig noch nicht vollständig
+        } else if (!field.getCell(column-1, row).isPassable && !field.getCell(column, row-1).isPassable) {
+            cellName = "cell"
+        } else if (!field.getCell(column-1, row).isPassable) {
+            cellName = "cellTopBorder"
+        } else if (!field.getCell(column, row-1).isPassable) {
+            cellName = "cellLeftBorder"
+        } else {
+            cellName = "cellBorder"
+        }
+    }
+    
+    cellName
+}
+
+@getCharacterImagePath(character:de.htwg.stratego.model.ICharacter) = @{
+    // if Abfrage mit allen Figuren und dann passendes Bild auswählen 
+    // oder dem Character einen Namen geben und Bilder entprechend benennen
+    routes.Assets.versioned("images/00stratego-flag2.svg")
+}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,11 +49,13 @@
         </div>
         <div class="field">
             <div class="innerfield">
-                @for(row <- 0 until controller.getFieldWidth()) {
+                @for(row <- 0 until controller.getFieldHeight()) {
                     <div class="fieldrow">
-                        @for(column <- 0 until controller.getFieldHeight()) {
-                            <span class="cell">
-                                <img class="figure" src="@routes.Assets.versioned("images/00stratego-flag2.svg")"" >
+                        @for(column <- 0 until controller.getFieldWidth()) {
+                            <span class="@getCellBorder(row, column)">
+                            @if(controller.getIField().getCell(column, row).containsCharacter()) {
+                                <img class="figure" src="@getCharacterImagePath(controller.getIField().getCell(column, row).getCharacter)" >
+                            }
                             </span>
                         }
                     </div>

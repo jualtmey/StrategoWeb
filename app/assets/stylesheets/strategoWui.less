@@ -1,5 +1,6 @@
 @cell-size: 4em;
-@border: 0.1em solid rgba(57,128,57,0.4);
+@border-width: 0.1em;
+@border: @border-width solid rgba(57,128,57,0.4);
 
 .field {
   display: inline-block;
@@ -22,11 +23,29 @@
   font-size: 16px; //turn back font-size from fieldrow
   display: inline-block;
   //background: rgba(83, 255, 175, 0.5);
-  border-left: @border;
-  border-top: @border;
   //border-radius: 0.4em;
   width: @cell-size;
   height: @cell-size;
+}
+
+.cellLeftBorder {
+  .cell;
+  border-left: @border;
+  width: @cell-size - @border-width;
+}
+
+.cellTopBorder {
+  .cell;
+  border-top: @border;
+  height: @cell-size - @border-width;
+}
+
+.cellBorder {
+  .cell;
+  border-left: @border;
+  border-top: @border;
+  width: @cell-size - @border-width;
+  height: @cell-size - @border-width;
 }
 
 .figure {

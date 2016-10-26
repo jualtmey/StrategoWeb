@@ -91,7 +91,15 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="selectArea col-md-3">
-                    hallo
+                    @for(i <- 0 until 40) {
+                        <span class="selectCell">
+                            @if(i < controller.getCurrentPlayer().getCharacterList().size()) {
+                                <img class="figure @getPlayer(controller.getCurrentPlayer())" src="@getCharacterImagePath(controller.getCurrentPlayer().getCharacterList()(i))">
+                            } else {
+                                <img class="figure" src="@routes.Assets.versioned("images/figures/empty.svg")">
+                            }
+                        </span>
+                    }
                 </div>
                 <div class="field col-md-7">
                     <div class="innerfield">

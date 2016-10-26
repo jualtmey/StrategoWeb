@@ -1,18 +1,32 @@
 @border-width: 1px;
 @border: @border-width solid rgba(57,128,57,0.4);
 
+table {
+  border: black;
+}
+
+.back {
+  position: absolute;
+  left: 14%;
+  top: -5%;
+  width: 80%;
+}
+
 body {
-  background: rgb(204, 255, 187);
+  background: rgb(53, 128, 51);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 .field {
   display: inline-block;
-  background-image: url("../images/backgroundField.svg");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  padding: 10%;
+  padding-right: 5%;
+  padding-left: 5%;
 }
 
 .innerfield {
+  background-image: url("../images/backgroundFieldInnerField.svg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   border-right: @border;
   border-bottom: @border;
 }

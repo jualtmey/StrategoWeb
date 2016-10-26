@@ -1,13 +1,13 @@
-New log file opened at Tue Oct 25 11:14:42 CEST 2016 by 16580@DESKTOP-093DMDB
-Taking next connection to: 40591
-New client attempting to connect on port: 40592-40591
-  Address = /192.168.110.1:40591
-This client on port 40592 has uuid 74fa64a0-66d3-48ce-90c4-339b6998e5be configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-74fa64a0-66d3-48ce-90c4-339b6998e5be
-Taking next connection to: 40591
-New client attempting to connect on port: 40593-40591
-  Address = /192.168.110.1:40591
-Handshake exception on socket: 40593
+New log file opened at Wed Oct 26 10:32:13 CEST 2016 by 19348@DESKTOP-093DMDB
+Taking next connection to: 44523
+New client attempting to connect on port: 44524-44523
+  Address = /192.168.110.1:44523
+This client on port 44524 has uuid bc209ac9-5fcd-44a0-87ae-380b3be61d76 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-bc209ac9-5fcd-44a0-87ae-380b3be61d76
+Taking next connection to: 44523
+New client attempting to connect on port: 44525-44523
+  Address = /192.168.110.1:44523
+Handshake exception on socket: 44525
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
@@ -23,21 +23,27 @@ Caused by: java.net.SocketException: Software caused connection abort: recv fail
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 40591
-New client attempting to connect on port: 40594-40591
-  Address = /192.168.110.1:40591
-This client on port 40594 has uuid 8560b788-ed20-45bd-a6ce-0b132d130db5 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-74fa64a0-66d3-48ce-90c4-339b6998e5be, activator-8560b788-ed20-45bd-a6ce-0b132d130db5
-Taking next connection to: 40591
+Taking next connection to: 44523
+New client attempting to connect on port: 44526-44523
+  Address = /192.168.110.1:44523
+This client on port 44526 has uuid e1c727e2-ee1c-44f6-8b95-3900c7ff48b7 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-bc209ac9-5fcd-44a0-87ae-380b3be61d76, activator-e1c727e2-ee1c-44f6-8b95-3900c7ff48b7
+Taking next connection to: 44523
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 40591
+Taking next connection to: 44523
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 40591
-New client attempting to connect on port: 40619-40591
-  Address = /192.168.110.1:40591
-Handshake exception on socket: 40619
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523
+New client attempting to connect on port: 44611-44523
+  Address = /192.168.110.1:44523
+Handshake exception on socket: 44611
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
@@ -53,12 +59,63 @@ Caused by: java.net.SocketException: Software caused connection abort: recv fail
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 40591
-New client attempting to connect on port: 40620-40591
-  Address = /192.168.110.1:40591
-This client on port 40620 has uuid 1b50f139-7d97-4fa9-ba54-bd51c151311e configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: activator-8560b788-ed20-45bd-a6ce-0b132d130db5, play-fork-run-1b50f139-7d97-4fa9-ba54-bd51c151311e
-Taking next connection to: 40591
+Taking next connection to: 44523
+New client attempting to connect on port: 44612-44523
+  Address = /192.168.110.1:44523
+This client on port 44612 has uuid 4f6c56a1-fbd5-43df-82cd-ec8c5fe947c0 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: activator-e1c727e2-ee1c-44f6-8b95-3900c7ff48b7, play-fork-run-4f6c56a1-fbd5-43df-82cd-ec8c5fe947c0
+Taking next connection to: 44523
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 40591
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 44523

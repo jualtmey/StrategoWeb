@@ -12,7 +12,7 @@
         cellName = "cellBorder"
     } else {
         if (column == 0 || row == 0) {
-            cellName = "cellBorder" // eig noch nicht vollständig
+            cellName = "cellBorder"
         } else if (!field.getCell(column-1, row).isPassable && !field.getCell(column, row-1).isPassable) {
             cellName = "cell"
         } else if (!field.getCell(column-1, row).isPassable) {
@@ -27,10 +27,21 @@
     cellName
 }
 
+
+@getPlayer(player:de.htwg.stratego.model.IPlayer) = @{
+    var playerName = ""
+    var players:Array[de.htwg.stratego.model.IPlayer] = controller.getPlayer()
+
+    if ( player == players(0)) {
+        playerName = "player1"
+    } else if ( player == players(1)) {
+        playerName = "player2"
+    }
+    playerName
+}
+
 @getCharacterImagePath(character:de.htwg.stratego.model.ICharacter) = @{
-    // if Abfrage mit allen Figuren und dann passendes Bild auswählen 
-    // oder dem Character einen Namen geben und Bilder entprechend benennen
-    routes.Assets.versioned("images/00stratego-flag2.svg")
+    routes.Assets.versioned("images/figures/" + character.getRank() +".svg")
 }
 
 <!DOCTYPE html>
@@ -54,7 +65,7 @@
                         @for(column <- 0 until controller.getFieldWidth()) {
                             <span class="@getCellBorder(row, column)">
                             @if(controller.getIField().getCell(column, row).containsCharacter()) {
-                                <img class="figure" src="@getCharacterImagePath(controller.getIField().getCell(column, row).getCharacter)" >
+                                <img class="figure @getPlayer(controller.getIField().getCell(column, row).getCharacter().getPlayer())" src="@getCharacterImagePath(controller.getIField().getCell(column, row).getCharacter())" >
                             }
                             </span>
                         }

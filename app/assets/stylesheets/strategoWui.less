@@ -1,10 +1,10 @@
-@cell-size: 4em;
-@border-width: 0.1em;
+@cell-size: 75px;
+@border-width: 1px;
 @border: @border-width solid rgba(57,128,57,0.4);
 
 .field {
   display: inline-block;
-  background-image: url("../images/backgroundField2.svg");
+  background-image: url("../images/backgroundField.svg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: @cell-size * 2;
@@ -22,8 +22,6 @@
 .cell {
   font-size: 16px; //turn back font-size from fieldrow
   display: inline-block;
-  //background: rgba(83, 255, 175, 0.5);
-  //border-radius: 0.4em;
   width: @cell-size;
   height: @cell-size;
 }
@@ -49,9 +47,17 @@
 }
 
 .figure {
-  //border-radius: 0.4em;
-  //border: 0.12em solid rgba(255, 255, 255, .5);
-  //position: inherit;
-  width: 100%;
-  height: 100%;
+  border-radius: 1.0em;
+  width: @cell-size - @border-width * 3;
+  height: @cell-size - @border-width * 3 ;
+}
+
+.player1 {
+  background: rgba(255, 33, 45, 0.40);
+  border: @border-width solid rgba(139, 5, 5, 0.80);
+}
+
+.player2 {
+  background: rgba(61, 119, 255, 0.4);
+  border: @border-width solid rgba(19, 44, 139, 0.8);
 }

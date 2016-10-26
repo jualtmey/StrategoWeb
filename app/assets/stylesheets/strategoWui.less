@@ -1,13 +1,15 @@
-@cell-size: 75px;
 @border-width: 1px;
 @border: @border-width solid rgba(57,128,57,0.4);
 
+body {
+  background: rgb(204, 255, 187);
+}
 .field {
   display: inline-block;
   background-image: url("../images/backgroundField.svg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  padding: @cell-size * 2;
+  padding: 10%;
 }
 
 .innerfield {
@@ -22,34 +24,28 @@
 .cell {
   font-size: 16px; //turn back font-size from fieldrow
   display: inline-block;
-  width: @cell-size;
-  height: @cell-size;
+  width: 10%;
 }
 
 .cellLeftBorder {
   .cell;
   border-left: @border;
-  width: @cell-size - @border-width;
 }
 
 .cellTopBorder {
   .cell;
   border-top: @border;
-  height: @cell-size - @border-width;
 }
 
 .cellBorder {
   .cell;
   border-left: @border;
   border-top: @border;
-  width: @cell-size - @border-width;
-  height: @cell-size - @border-width;
 }
 
 .figure {
   border-radius: 1.0em;
-  width: @cell-size - @border-width * 3;
-  height: @cell-size - @border-width * 3 ;
+  width: 100%;
 }
 
 .player1 {
@@ -60,4 +56,8 @@
 .player2 {
   background: rgba(61, 119, 255, 0.4);
   border: @border-width solid rgba(19, 44, 139, 0.8);
+}
+
+.selectArea {
+  background-color: gold;
 }

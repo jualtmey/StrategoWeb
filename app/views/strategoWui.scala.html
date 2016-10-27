@@ -136,26 +136,13 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th><img class="icon" src="@routes.Assets.versioned("images/figures/0.svg")" > Flagge</th>
-                                <th>1/1</th>
-                                <th>0/1</th>
-                            </tr>
-                            <tr>
-                                <th><img class="icon" src="graphics/01stratego-spy.svg" > Spion</th>
-                                <th>1/1</th>
-                                <th>1/1</th>
-                            </tr>
-                            <tr>
-                                <th><img class="icon" src="graphics/07stratego-major.svg" > Major</th>
-                                <th>5/5</th>
-                                <th>3/5</th>
-                            </tr>
-                            <tr>
-                                <th>...</th>
-                                <th>...</th>
-                                <th>...</th>
-                            </tr>
+                            @for(i <- 0 until 12) {
+                                <tr>
+                                    <th><img class="icon" src="@routes.Assets.versioned("images/figures/" + i.toString + ".svg")" >NAME</th>
+                                    <th>@controller.getNumberOfCharactersOnField(i, controller.getPlayer()(0))/1</th>
+                                    <th>@controller.getNumberOfCharactersOnField(i, controller.getPlayer()(1))/1</th>
+                                </tr>
+                            }
                             </tbody>
                         </table>
                     </div>

@@ -1,5 +1,6 @@
 logs
 target
+/project/.sbtserver
 /.idea
 /.idea_modules
 /.classpath
@@ -7,3 +8,4 @@ target
 /.settings
 /RUNNING_PID
 /*.iml
+/.sbtserver

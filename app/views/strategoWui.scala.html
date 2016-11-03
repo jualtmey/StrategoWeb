@@ -5,19 +5,17 @@
 
 @getCellBorder(row:Int, column:Int) = @{
     var cellName = ""
-    var field = controller.getIField
-    var cell = field.getCell(column, row)
     
-    if (cell.isPassable()) {
+    if (controller.isPassable(column, row)) {
         cellName = "cellBorder" + " passable"
     } else {
         if (column == 0 || row == 0) {
             cellName = "cellBorder"
-        } else if (!field.getCell(column-1, row).isPassable && !field.getCell(column, row-1).isPassable) {
+        } else if (!controller.isPassable(column-1, row) && !controller.isPassable(column, row-1)) {
             cellName = "cell"
-        } else if (!field.getCell(column-1, row).isPassable) {
+        } else if (!controller.isPassable(column-1, row)) {
             cellName = "cellTopBorder"
-        } else if (!field.getCell(column, row-1).isPassable) {
+        } else if (!controller.isPassable(column, row-1)) {
             cellName = "cellLeftBorder"
         } else {
             cellName = "cellBorder"
@@ -30,13 +28,13 @@
 
 @getPlayer(player:de.htwg.stratego.model.IPlayer) = @{
     var playerName = ""
-    var players:Array[de.htwg.stratego.model.IPlayer] = controller.getPlayer()
 
-    if ( player == players(0)) {
+    if (player == controller.getPlayerOne) {
         playerName = "player1"
-    } else if ( player == players(1)) {
+    } else if (player == controller.getPlayerTwo) {
         playerName = "player2"
     }
+    
     playerName
 }
 
@@ -113,8 +111,8 @@
                                 <div class="fieldrow">
                                     @for(column <- 0 until controller.getFieldWidth()) {
                                         <span class="@getCellBorder(row, column)">
-                                        @if(controller.getIField().getCell(column, row).containsCharacter()) {
-                                            <img class="figure @getPlayer(controller.getIField().getCell(column, row).getCharacter().getPlayer())" src="@getCharacterImagePath(controller.getIField().getCell(column, row).getCharacter())" >
+                                        @if(controller.containsCharacter(column, row)) {
+                                            <img class="figure @getPlayer(controller.getCharacter(column, row).getPlayer())" src="@getCharacterImagePath(controller.getCharacter(column, row))" >
                                         } else {
                                             <img class="figure" src="@routes.Assets.versioned("images/figures/empty.svg")">
                                         }
@@ -135,11 +133,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @for(i <- 0 until 12) {
+                            @for(rank <- 0 until 12) {
                                 <tr>
-                                    <th><img class="icon" src="@routes.Assets.versioned("images/figures/" + i.toString + ".svg")" >NAME</th>
-                                    <th>@controller.getNumberOfCharactersOnField(i, controller.getPlayer()(0))/1</th>
-                                    <th>@controller.getNumberOfCharactersOnField(i, controller.getPlayer()(1))/1</th>
+                                    <th><img class="icon" src="@routes.Assets.versioned("images/figures/" + rank.toString + ".svg")" ><br>@controller.nameOfCharacter(rank)</th>
+                                    <th>@controller.numberOfCharactersOnField(rank, controller.getPlayerOne)/@controller.maxNumberOfCharactersPerPlayer(rank)</th>
+                                    <th>@controller.numberOfCharactersOnField(rank, controller.getPlayerTwo)/@controller.maxNumberOfCharactersPerPlayer(rank)</th>
                                 </tr>
                             }
                             </tbody>

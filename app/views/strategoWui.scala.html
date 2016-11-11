@@ -60,12 +60,11 @@
 
 
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/strategoWui.css")">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- wenn offline-->
         <!--<script src="@routes.Assets.versioned("javascripts/bootstrap.js")" type="text/javascript"></script>-->
 
-        <!--
-        <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
-         -->
     </head>
     <body>
         <nav class="navbar navbar-default navbar-static-top">
@@ -110,7 +109,7 @@
                             @for(row <- 0 until controller.getFieldHeight()) {
                                 <div class="fieldrow">
                                     @for(column <- 0 until controller.getFieldWidth()) {
-                                        <span class="@getCellBorder(row, column)">
+                                        <span class="@getCellBorder(row, column)" data-row="@row" data-column="@column">
                                         @if(controller.containsCharacter(column, row)) {
                                             <img class="figure @getPlayer(controller.getCharacter(column, row).getPlayer())" src="@getCharacterImagePath(controller.getCharacter(column, row))" >
                                         } else {

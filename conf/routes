@@ -7,8 +7,9 @@ GET     /stratego                   controllers.HomeController.strategoIndex
 
 GET     /strategoTui/:command       controllers.HomeController.strategoTui(command:String)
 
-GET     /strategoWui                controllers.HomeController.strategoWui(command:String = "kein command")
-GET     /strategoWui/:command       controllers.HomeController.strategoWui(command:String)
+GET     /strategoWui                controllers.HomeController.strategoWui
+GET     /strategoWui/refresh        controllers.HomeController.refresh
+POST    /strategoWui/add            controllers.HomeController.add
 
 # An example controller showing a sample home page
 #GET     /                           controllers.HomeController.index

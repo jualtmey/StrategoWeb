@@ -22,6 +22,8 @@ Array.from(passable).forEach(e => e.addEventListener('mouseout', removeSelectedC
 
 
 $(function() {
+    reload();
+
     $(".selectCell").click(function(event){
         $.ajax({
             type: "POST",
@@ -29,21 +31,38 @@ $(function() {
             contentType: "text/json",
             data: JSON.stringify(
                 {
-                    'row': 1,
+                    'row': 2,
                     'column': 1,
                     'rank': 5,
                 }),
             success: function(responseTxt) {
-                let strategoJson = JSON.parse(responseTxt);
-                refreshField(strategoJson.field, strategoJson.playerOne, strategoJson.playerTwo);
+                refresh(JSON.parse(responseTxt));
             },
             error:  function() {
-                alert("Error");
+                alert("Post Error");
             },
         });
 
     });
 });
+
+function reload() {
+    $.ajax({
+        type: "GET",
+        url: '/strategoWui/refresh',
+        success: function(responseTxt) {
+            refresh(JSON.parse(responseTxt));
+        },
+        error:  function() {
+            alert("Get Error");
+        },
+    });
+}
+
+function refresh(strategoJson) {
+    // TODO refreshSelect und refreshInfo
+    refreshField(strategoJson.field, strategoJson.playerOne, strategoJson.playerTwo);
+}
 
 function refreshField(field, playerOne, playerTwo) {
     // $(".cellBorder[data-row='0'][data-column='3'] .figure").attr('src', 'assets/images/figures/0.svg');

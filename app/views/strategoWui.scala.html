@@ -96,11 +96,7 @@
                 <div class="selectArea col-md-3">
                     @for(i <- 0 until 40) {
                         <span class="selectCell">
-                            @if(i < controller.getCurrentPlayer().getCharacterList().size()) {
-                                <img class="figure @getPlayer(controller.getCurrentPlayer())" src="@getCharacterImagePath(controller.getCurrentPlayer().getCharacterList()(i))">
-                            } else {
-                                <img class="figure" src="@routes.Assets.versioned("images/figures/empty.svg")">
-                            }
+                            <img class="figure" src="@routes.Assets.versioned("images/figures/empty.svg")">
                         </span>
                     }
                 </div>
@@ -110,11 +106,7 @@
                                 <div class="fieldrow">
                                     @for(column <- 0 until controller.getFieldWidth()) {
                                         <span class="@getCellBorder(row, column)" data-row="@row" data-column="@column">
-                                        @if(controller.containsCharacter(column, row)) {
-                                            <img class="figure @getPlayer(controller.getCharacter(column, row).getPlayer())" src="@getCharacterImagePath(controller.getCharacter(column, row))" >
-                                        } else {
                                             <img class="figure" src="@routes.Assets.versioned("images/figures/empty.svg")">
-                                        }
                                         </span>
                                     }
                                 </div>

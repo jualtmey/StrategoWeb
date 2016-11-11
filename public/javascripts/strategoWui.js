@@ -60,8 +60,31 @@ function reload() {
 }
 
 function refresh(strategoJson) {
-    // TODO refreshSelect und refreshInfo
+    // TODO refreshInfo
+    refreshSelect(strategoJson.select, strategoJson.playerOne, strategoJson.playerTwo);
     refreshField(strategoJson.field, strategoJson.playerOne, strategoJson.playerTwo);
+}
+
+function refreshSelect(select, playerOne, playerTwo) {
+    for (i = 0; i < 40; i++) {
+        let selectCell = $($(".selectCell .figure")[i]);
+        let character = select.characterList[i];
+        if (i < select.characterList.length) {
+            if(character.player === playerOne) {
+                selectCell.addClass("player1");
+                selectCell.removeClass("player2");
+            }
+            if(character.player === playerTwo) {
+                selectCell.addClass("player2");
+                selectCell.removeClass("player1");
+            }
+            selectCell.attr('src', 'assets/images/figures/' + character.rank + '.svg');
+        } else {
+            selectCell.removeClass("player1");
+            selectCell.removeClass("player2");
+            selectCell.attr('src', 'assets/images/figures/empty.svg');
+        }
+    }
 }
 
 function refreshField(field, playerOne, playerTwo) {
@@ -78,7 +101,7 @@ function refreshField(field, playerOne, playerTwo) {
                 cell.removeClass("player1");
             }
             if (character.isVisible) {
-                cell.attr('src', 'assets/images/figures/'+ character.rank +'.svg');
+                cell.attr('src', 'assets/images/figures/' + character.rank + '.svg');
             } else {
                 cell.attr('src', 'assets/images/figures/empty.svg');
             }

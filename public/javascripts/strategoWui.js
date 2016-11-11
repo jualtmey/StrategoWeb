@@ -65,19 +65,23 @@ function refresh(strategoJson) {
 }
 
 function refreshField(field, playerOne, playerTwo) {
-    // $(".cellBorder[data-row='0'][data-column='3'] .figure").attr('src', 'assets/images/figures/0.svg');
     field.innerField.forEach(item => {
         let cell = $(".cellBorder[data-row='" + item.row + "'][data-column='" + item.column+ "'] .figure")
         if (item.containsCharacter) {
-            if(item.character.player === playerOne) {
+            let character = item.character;
+            if(character.player === playerOne) {
                 cell.addClass("player1");
                 cell.removeClass("player2");
             }
-            if(item.character.player === playerTwo) {
+            if(character.player === playerTwo) {
                 cell.addClass("player2");
                 cell.removeClass("player1");
             }
-            cell.attr('src', 'assets/images/figures/'+ item.character.rank +'.svg');
+            if (character.isVisible) {
+                cell.attr('src', 'assets/images/figures/'+ character.rank +'.svg');
+            } else {
+                cell.attr('src', 'assets/images/figures/empty.svg');
+            }
         } else {
             cell.removeClass("player1");
             cell.removeClass("player2");

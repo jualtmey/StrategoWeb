@@ -20,30 +20,38 @@ function removeSelectedClass() {
 
 Array.from(passable).forEach(e => e.addEventListener('mouseout', removeSelectedClass));
 
+let addEventCharacterRank;
 
 $(function() {
     reload();
 
-    $(".selectCell").click(function(event){
-        $.ajax({
-            type: "POST",
-            url: '/strategoWui/add',
-            contentType: "text/json",
-            data: JSON.stringify(
-                {
-                    'row': 2,
-                    'column': 1,
-                    'rank': 5,
-                }),
-            success: function(responseTxt) {
-                refresh(JSON.parse(responseTxt));
-            },
-            error:  function() {
-                alert("Post Error");
-            },
-        });
-
+    $(".selectCell .figure").click(function(event) {
+        addEventCharacterRank = $(this).attr("data-rank");
     });
+    
+    $(".passable").click(function(event) {
+        if (addEventCharacterRank !== undefined) {
+            $.ajax({
+                type: "POST",
+                url: '/strategoWui/add',
+                contentType: "text/json",
+                data: JSON.stringify(
+                    {
+                        'row': parseInt($(this).attr("data-row")),
+                        'column': parseInt($(this).attr("data-column")),
+                        'rank': parseInt(addEventCharacterRank)
+                    }),
+                success: function(responseTxt) {
+                    refresh(JSON.parse(responseTxt));
+                },
+                error:  function() {
+                    alert("Post Error");
+                },
+            });
+            addEventCharacterRank = undefined;
+        }
+    });
+    
 });
 
 function reload() {
@@ -79,10 +87,12 @@ function refreshSelect(select, playerOne, playerTwo) {
                 selectCell.removeClass("player1");
             }
             selectCell.attr('src', 'assets/images/figures/' + character.rank + '.svg');
+            selectCell.attr('data-rank', character.rank);
         } else {
             selectCell.removeClass("player1");
             selectCell.removeClass("player2");
             selectCell.attr('src', 'assets/images/figures/empty.svg');
+            selectCell.removeAttr("data-rank");
         }
     }
 }

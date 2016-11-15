@@ -46,22 +46,19 @@
 <html>
     <head>
         <title>StrategoWui</title>
-        <!-- Latest compiled and minified CSS -->
+        <!--css-->
+        <!-- Bootstrap Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
         <!-- wenn offline-->
         <!--<link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap.css")">-->
-
         <!-- Optional theme -->
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
-
-        <!-- Latest compiled and minified JavaScript -->
-        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
-
-
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/strategoWui.css")">
 
+        <!--js-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="@routes.Assets.versioned("javascripts/strategoWui.js")" ></script>
         <!-- wenn offline-->
         <!--<script src="@routes.Assets.versioned("javascripts/bootstrap.js")" type="text/javascript"></script>-->
 
@@ -70,6 +67,11 @@
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container-fluid">
                 <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <a class="navbar-brand" href="#">
                         <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                         STRATEGO
@@ -93,14 +95,14 @@
         <img class="back hidden-sm hidden-xs" src="@routes.Assets.versioned("images/backgroundFieldGreen.svg")">
         <div class="container-fluid">
             <div class="row">
-                <div class="selectArea col-md-3">
+                <div class="selectArea col-md-4">
                     @for(i <- 0 until 40) {
                         <span class="selectCell">
                             <img class="figure" src="@routes.Assets.versioned("images/figures/empty.svg")">
                         </span>
                     }
                 </div>
-                <div class="field col-md-7">
+                <div class="field col-md-6">
                     <div class="innerfield">
                             @for(row <- 0 until controller.getFieldHeight()) {
                                 <div class="fieldrow">
@@ -127,8 +129,8 @@
                             @for(rank <- 0 until 12) {
                                 <tr>
                                     <th><img class="icon" src="@routes.Assets.versioned("images/figures/" + rank.toString + ".svg")" ><br>@controller.nameOfCharacter(rank)</th>
-                                    <th>@controller.numberOfCharactersOnField(rank, controller.getPlayerOne)/@controller.maxNumberOfCharactersPerPlayer(rank)</th>
-                                    <th>@controller.numberOfCharactersOnField(rank, controller.getPlayerTwo)/@controller.maxNumberOfCharactersPerPlayer(rank)</th>
+                                    <th class="numberOfCharacters">@controller.numberOfCharactersOnField(rank, controller.getPlayerOne)/@controller.maxNumberOfCharactersPerPlayer(rank)</th>
+                                    <th class="numberOfCharacters">@controller.numberOfCharactersOnField(rank, controller.getPlayerTwo)/@controller.maxNumberOfCharactersPerPlayer(rank)</th>
                                 </tr>
                             }
                             </tbody>
@@ -137,6 +139,6 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="@routes.Assets.versioned("javascripts/strategoWui.js")" ></script>
+
     </body>
 </html>

@@ -2,10 +2,19 @@
 @border: @border-width solid rgba(57,128,57,0.4);
 
 /*bootstrap <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
-/*navbar*/
+/*navbar height*/
+.navbar-nav > li > a, .navbar-brand {
+  padding-top:4px !important;
+  padding-bottom:0 !important;
+  height: 32px;
+}
+.navbar {min-height:28px !important;}
+
+/*navbar color*/
 .navbar-default {
   background-color: #84c550;
   border-color: #2d6e2d;
+  margin-bottom: 0.5%;
 }
 
 /* title navbar*/
@@ -17,24 +26,39 @@
 .navbar-default .navbar-nav > li > a {
   color: #ffffff;
 }
+/*navbar small device icon bar*/
+.navbar-header button:hover {
+  background-color: #cfff17 !important;
+}
 
-/*table-condensed*/
+.icon-bar {
+  background-color: white !important;
+}
+
+/*selectArea*/
+.selectArea {
+  padding-right: 0px;
+}
+
+/*infoArea*/
 .table.table-condensed tr th {
   border-bottom: 1px solid #83c54f;
   color: #ffffff;
   .icon {
-    height: 3em;
+    height: 8%;
   }
 }
-
-
+.infoArea {
+  padding-left: 0px;
+  .container-fluid {
+    padding-left: 0px;
+  }
+}
 /*bootstrap <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
-
-
 
 .back {
   position: absolute;
-  left: 14%;
+  left: 16%;
   top: -5%;
   width: 80%;
   z-index: -1;
@@ -42,12 +66,15 @@
 
 body {
   background: rgb(53, 128, 51);
+  @media(min-width: 1000px) {
+    overflow: hidden;
+  }
 }
 
 .field {
   display: inline-block;
-  padding-right: 5%;
-  padding-left: 5%;
+  padding-right: 2%;
+  padding-left: 1%;
 }
 
 .innerfield {
@@ -89,9 +116,17 @@ body {
   width: 100%;
 }
 
-.selected {
+.hover {
   filter: grayscale(0.5);
   background-color: rgba(115, 115, 115, 0.3);
+}
+
+.selected {
+  filter:grayscale(1) brightness(2.5);
+}
+
+.selected.hover {
+  filter:grayscale(1) brightness(3.5);
 }
 
 .player1 {
@@ -113,5 +148,9 @@ body {
     border: @border-width solid rgba(38, 111, 38, 0.76);
     display: inline-block;
     width: 15%;
+}
+
+.numberOfCharacters {
+  font-size: 130%;
 }
 

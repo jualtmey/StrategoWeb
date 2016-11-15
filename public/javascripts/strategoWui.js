@@ -1,58 +1,134 @@
-let dropdown = document.getElementsByClassName("dropdown");
-
-function setOpenClass() {
-    this.classList.toggle("open");
-}
-Array.from(dropdown).forEach(e => e.addEventListener('click', setOpenClass));
-
-
-let passable = document.getElementsByClassName("passable");
-
-function setSelectedClass() {
-    this.getElementsByClassName("figure")[0].classList.add("selected");
-}
-
-Array.from(passable).forEach(e => e.addEventListener('mouseover', setSelectedClass));
-
-function removeSelectedClass() {
-    this.getElementsByClassName("figure")[0].classList.remove("selected");
-}
-
-Array.from(passable).forEach(e => e.addEventListener('mouseout', removeSelectedClass));
+dropdownNavbar();
 
 let addEventCharacterRank;
+let lastClickedCell = "nothingSelected";
 
 $(function() {
     reload();
-
-    $(".selectCell .figure").click(function(event) {
-        addEventCharacterRank = $(this).attr("data-rank");
-    });
-    
-    $(".passable").click(function(event) {
-        if (addEventCharacterRank !== undefined) {
-            $.ajax({
-                type: "POST",
-                url: '/strategoWui/add',
-                contentType: "text/json",
-                data: JSON.stringify(
-                    {
-                        'row': parseInt($(this).attr("data-row")),
-                        'column': parseInt($(this).attr("data-column")),
-                        'rank': parseInt(addEventCharacterRank)
-                    }),
-                success: function(responseTxt) {
-                    refresh(JSON.parse(responseTxt));
-                },
-                error:  function() {
-                    alert("Post Error");
-                },
-            });
-            addEventCharacterRank = undefined;
-        }
-    });
-    
+    addRemoveHoverOnPassableCells();
+    addRemoveHoverOnSelectCell();
+    clickActionsOnFigure();
 });
+
+function clickActionsOnFigure() {
+    let leftMouseButton = 1;
+
+    $(".figure").mouseup(
+        function(event) {
+            if (event.which === leftMouseButton) {
+                $(this).css("filter", "");
+                this.classList.toggle("selected");
+                whichInputIsMade($(this).parent(), $(this));
+            }
+        }
+    ).mousedown(
+        function(event) {
+            if (event.which === leftMouseButton) {
+                $(this).css("filter", "brightness(3%)");
+            }
+        }
+    ).mouseleave( // to remove even when you click and drag
+        function () {
+            $(this).css("filter", "");
+        }
+    );
+}
+
+function whichInputIsMade(parentCell, figure) {
+    if (parentCell.hasClass("selectCell")) {
+        if (lastClickedCell === "selectCell") {
+            lastClickedCell = "nothingSelected";
+            removeSelected();
+        } else if (lastClickedCell === "nothingSelected") {
+            lastClickedCell = "selectCell";
+            addEventCharacterRank = figure.attr("data-rank");
+            console.log(addEventCharacterRank);
+        } else if (lastClickedCell === "cellBorder") {
+            // TODO Input r remove
+            lastClickedCell = "nothingSelected";
+            removeSelected();
+        }
+    }
+    if (parentCell.hasClass("cellBorder")) {
+        if (lastClickedCell === "selectCell") {
+            lastClickedCell = "nothingSelected";
+            add(parentCell);
+            removeSelected();
+        } else if (lastClickedCell === "nothingSelected") {
+            lastClickedCell = "cellBorder";
+           // TODO Input r remove save Rank
+        } else if (lastClickedCell === "cellBorder") {
+            // TODO Input m move when in play mode
+            lastClickedCell = "nothingSelected";
+            removeSelected();
+        }
+    }
+    console.log(lastClickedCell);
+}
+
+function removeSelected() {
+    $(".selected").removeClass("selected");
+}
+
+function add(parentCell) {
+    if (addEventCharacterRank !== undefined) {
+        $.ajax({
+            type: "POST",
+            url: '/strategoWui/add',
+            contentType: "text/json",
+            data: JSON.stringify(
+                {
+                    'row': parseInt(parentCell.attr("data-row")),
+                    'column': parseInt(parentCell.attr("data-column")),
+                    'rank': parseInt(addEventCharacterRank)
+                }),
+            success: function (responseTxt) {
+                refresh(JSON.parse(responseTxt));
+            },
+            error: function () {
+                alert("Post Error");
+            },
+        });
+        addEventCharacterRank = undefined;
+    }
+}
+
+function addRemoveHoverOnSelectCell() {
+    function enterCell() {
+        this.classList.add("hover");
+    }
+
+    function leaveCell() {
+        this.classList.remove("hover");
+    }
+
+    $(".selectCell .figure").hover(enterCell, leaveCell)
+}
+
+function addRemoveHoverOnPassableCells() {
+    let passable = document.getElementsByClassName("passable");
+
+    function setSelectedClass() {
+        this.getElementsByClassName("figure")[0].classList.add("hover");
+    }
+
+    Array.from(passable).forEach(e => e.addEventListener('mouseover', setSelectedClass));
+
+    function removeSelectedClass() {
+        this.getElementsByClassName("figure")[0].classList.remove("hover");
+    }
+
+    Array.from(passable).forEach(e => e.addEventListener('mouseout', removeSelectedClass));
+}
+
+function dropdownNavbar() {
+    let dropdown = document.getElementsByClassName("dropdown");
+
+    function setOpenClass() {
+        this.classList.toggle("open");
+    }
+    Array.from(dropdown).forEach(e => e.addEventListener('click', setOpenClass));
+}
 
 function reload() {
     $.ajax({
@@ -69,8 +145,11 @@ function reload() {
 
 function refresh(strategoJson) {
     // TODO refreshInfo
-    refreshSelect(strategoJson.select, strategoJson.playerOne, strategoJson.playerTwo);
-    refreshField(strategoJson.field, strategoJson.playerOne, strategoJson.playerTwo);
+
+    let {select: select, field: field, playerOne: playerOne, playerTwo: playerTwo} = strategoJson;
+
+    refreshSelect(select, playerOne, playerTwo);
+    refreshField(field, playerOne, playerTwo);
 }
 
 function refreshSelect(select, playerOne, playerTwo) {
@@ -113,7 +192,7 @@ function refreshField(field, playerOne, playerTwo) {
             if (character.isVisible) {
                 cell.attr('src', 'assets/images/figures/' + character.rank + '.svg');
             } else {
-                cell.attr('src', 'assets/images/figures/empty.svg');
+                cell.attr('src', 'assets/images/figures/notVisible.svg');
             }
         } else {
             cell.removeClass("player1");

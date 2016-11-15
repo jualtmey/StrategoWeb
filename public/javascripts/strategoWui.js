@@ -1,7 +1,7 @@
 dropdownNavbar();
 
 let addEventCharacterRank;
-let lastClickedCell = "nothingSelected";
+let lastClickedCell;
 
 $(function() {
     reload();
@@ -36,34 +36,34 @@ function clickActionsOnFigure() {
 
 function whichInputIsMade(parentCell, figure) {
     if (parentCell.hasClass("selectCell")) {
-        if (lastClickedCell === "selectCell") {
-            lastClickedCell = "nothingSelected";
-            removeSelected();
-        } else if (lastClickedCell === "nothingSelected") {
-            lastClickedCell = "selectCell";
+        if (lastClickedCell === undefined) {
+            lastClickedCell = parentCell;
             addEventCharacterRank = figure.attr("data-rank");
             console.log(addEventCharacterRank);
-        } else if (lastClickedCell === "cellBorder") {
+        } else if (lastClickedCell.hasClass("selectCell")) {
+            lastClickedCell = undefined;
+            removeSelected();
+        } else if (lastClickedCell.hasClass("cellBorder")) {
             // TODO Input r remove
-            lastClickedCell = "nothingSelected";
+            lastClickedCell = undefined;
             removeSelected();
         }
     }
     if (parentCell.hasClass("cellBorder")) {
-        if (lastClickedCell === "selectCell") {
-            lastClickedCell = "nothingSelected";
+        if (lastClickedCell === undefined) {
+            lastClickedCell = parentCell;
+           // TODO Input r remove save Rank
+        } else if (lastClickedCell.hasClass("selectCell")) {
+            lastClickedCell = undefined;
             add(parentCell);
             removeSelected();
-        } else if (lastClickedCell === "nothingSelected") {
-            lastClickedCell = "cellBorder";
-           // TODO Input r remove save Rank
-        } else if (lastClickedCell === "cellBorder") {
+        } else if (lastClickedCell.hasClass("cellBorder")) {
             // TODO Input m move when in play mode
-            lastClickedCell = "nothingSelected";
+            swap(parentCell);
+            lastClickedCell = undefined;
             removeSelected();
         }
     }
-    console.log(lastClickedCell);
 }
 
 function removeSelected() {
@@ -119,6 +119,27 @@ function addRemoveHoverOnPassableCells() {
     }
 
     Array.from(passable).forEach(e => e.addEventListener('mouseout', removeSelectedClass));
+}
+
+function swap(parentCell) {
+    $.ajax({
+        type: "POST",
+        url: '/strategoWui/swap',
+        contentType: "text/json",
+        data: JSON.stringify(
+            {
+                'row1': parseInt(lastClickedCell.attr("data-row")),
+                'column1': parseInt(lastClickedCell.attr("data-column")),
+                'row2': parseInt(parentCell.attr("data-row")),
+                'column2': parseInt(parentCell.attr("data-column")),
+            }),
+        success: function (responseTxt) {
+            refresh(JSON.parse(responseTxt));
+        },
+        error: function () {
+            alert("Post Error");
+        },
+    });
 }
 
 function dropdownNavbar() {

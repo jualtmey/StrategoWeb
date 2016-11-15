@@ -46,6 +46,14 @@ public class HomeController extends Controller {
         controller.add(json.findPath("column").intValue(), json.findPath("row").intValue(), json.findPath("rank").intValue());
         return refresh();
     }
+    
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result swap() {
+        JsonNode json = request().body().asJson();
+        controller.swap(json.findPath("column1").intValue(), json.findPath("row1").intValue(),
+                        json.findPath("column2").intValue(), json.findPath("row2").intValue());
+        return refresh();
+    }
 
     public Result refresh() {
         return ok(controller.toJson());

@@ -144,12 +144,11 @@ function reload() {
 }
 
 function refresh(strategoJson) {
-    // TODO refreshInfo
-
-    let {select: select, field: field, playerOne: playerOne, playerTwo: playerTwo} = strategoJson;
+    let {select: select, field: field, info: info, playerOne: playerOne, playerTwo: playerTwo} = strategoJson;
 
     refreshSelect(select, playerOne, playerTwo);
     refreshField(field, playerOne, playerTwo);
+    refreshInfo(info, playerOne, playerTwo);
 }
 
 function refreshSelect(select, playerOne, playerTwo) {
@@ -201,3 +200,35 @@ function refreshField(field, playerOne, playerTwo) {
         }
     });
 }
+
+function refreshInfo(info, playerOne, playerTwo) {
+    let infoTableHead = $("#infoTable thead th");
+    let infoTableBody = $("#infoTable tbody tr");
+    let infoList = info.infoList;
+
+    $($(infoTableHead[1]).html(playerOne));
+    $($(infoTableHead[2]).html(playerTwo));
+    
+    for (rank = 0; rank < infoList.length; rank++) {
+        $($(infoTableBody[rank]).find("th")[1]).html(infoList[rank].currentCharactersPlayerOne + "/" + infoList[rank].maxCharacters);
+        $($(infoTableBody[rank]).find("th")[2]).html(infoList[rank].currentCharactersPlayerTwo + "/" + infoList[rank].maxCharacters);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

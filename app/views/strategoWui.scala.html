@@ -96,7 +96,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="selectArea col-md-4">
-                    @for(i <- 0 until 40) {
+                    @for(i <- 0 until controller.maxNumberOfCharactersPerPlayer) {
                         <span class="selectCell">
                             <img class="figure" src="@routes.Assets.versioned("images/figures/empty.svg")">
                         </span>
@@ -117,16 +117,16 @@
                 </div>
                 <div class="infoArea col-md-2">
                     <div class="container-fluid">
-                        <table class="table table-condensed">
+                        <table id="infoTable" class="table table-condensed">
                             <thead>
                             <tr>
                                 <th></th>
-                                <th>Player 1</th>
-                                <th>Player 2</th>
+                                <th>PlayerOne</th>
+                                <th>PlayerTwo</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @for(rank <- 0 until 12) {
+                            @for(rank <- 0 until controller.numberOfDifferentCharacterTypes) {
                                 <tr>
                                     <th><img class="icon" src="@routes.Assets.versioned("images/figures/" + rank.toString + ".svg")" ><br>@controller.nameOfCharacter(rank)</th>
                                     <th class="numberOfCharacters">@controller.numberOfCharactersOnField(rank, controller.getPlayerOne)/@controller.maxNumberOfCharactersPerPlayer(rank)</th>

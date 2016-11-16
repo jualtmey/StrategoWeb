@@ -62,6 +62,19 @@ public class HomeController extends Controller {
         return refresh();
     }
 
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result move() {
+        JsonNode json = request().body().asJson();
+        controller.move(json.findPath("columnFrom").intValue(), json.findPath("rowFrom").intValue(),
+                json.findPath("columnTo").intValue(), json.findPath("rowTo").intValue());
+        return refresh();
+    }
+
+    public Result finish() {
+        controller.changeStateNotify();
+        return refresh();
+    }
+
     public Result refresh() {
         return ok(controller.toJson());
     }

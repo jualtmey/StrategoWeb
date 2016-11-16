@@ -96,6 +96,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="selectArea col-md-4">
+                    <div class="finishTurn">
+                        Fertig
+                    </div>
                     @for(i <- 0 until controller.maxNumberOfCharactersPerPlayer) {
                         <span class="selectCell">
                             <img class="figure" src="@routes.Assets.versioned("images/figures/empty.svg")">

@@ -2,9 +2,19 @@ dropdownNavbar();
 
 let addEventCharacterRank;
 let lastClickedCell;
+let state;
+
 
 $(function() {
     reload();
+    let leftMouseButton = 1;
+    $(".finishTurn").mouseup(
+        function (event) {
+            if (event.which === leftMouseButton) {
+                finish();
+            }
+        }
+    );
     addRemoveHoverOnPassableCells();
     addRemoveHoverOnSelectCell();
     clickActionsOnFigure();
@@ -57,8 +67,11 @@ function whichInputIsMade(parentCell, figure) {
             add(parentCell);
             removeSelected();
         } else if (lastClickedCell.hasClass("cellBorder")) {
-            // TODO Input m move when in play mode
-            swap(parentCell);
+            if (state === "start") {
+                swap(parentCell);
+            } else if (state === "turn") {
+                move(parentCell);
+            }
             lastClickedCell = undefined;
             removeSelected();
         }
@@ -111,6 +124,61 @@ function remove(lastCell) {
     });
 }
 
+function swap(parentCell) {
+    $.ajax({
+        type: "POST",
+        url: '/strategoWui/swap',
+        contentType: "text/json",
+        data: JSON.stringify(
+            {
+                'row1': parseInt(lastClickedCell.attr("data-row")),
+                'column1': parseInt(lastClickedCell.attr("data-column")),
+                'row2': parseInt(parentCell.attr("data-row")),
+                'column2': parseInt(parentCell.attr("data-column")),
+            }),
+        success: function (responseTxt) {
+            refresh(JSON.parse(responseTxt));
+        },
+        error: function () {
+            alert("Swap Post Error");
+        },
+    });
+}
+
+function finish() {
+    $.ajax({
+        type: "GET",
+        url: '/strategoWui/finish',
+        success: function(responseTxt) {
+            refresh(JSON.parse(responseTxt));
+        },
+        error:  function() {
+            alert("Finish Get Error");
+        },
+    });
+}
+
+function move(parentCell) {
+    $.ajax({
+        type: "POST",
+        url: '/strategoWui/move',
+        contentType: "text/json",
+        data: JSON.stringify(
+            {
+                'rowFrom': parseInt(lastClickedCell.attr("data-row")),
+                'columnFrom': parseInt(lastClickedCell.attr("data-column")),
+                'rowTo': parseInt(parentCell.attr("data-row")),
+                'columnTo': parseInt(parentCell.attr("data-column")),
+            }),
+        success: function (responseTxt) {
+            refresh(JSON.parse(responseTxt));
+        },
+        error: function () {
+            alert("Move Post Error");
+        },
+    });
+}
+
 function addRemoveHoverOnSelectCell() {
     function enterCell() {
         this.classList.add("hover");
@@ -139,27 +207,6 @@ function addRemoveHoverOnPassableCells() {
     Array.from(passable).forEach(e => e.addEventListener('mouseout', removeSelectedClass));
 }
 
-function swap(parentCell) {
-    $.ajax({
-        type: "POST",
-        url: '/strategoWui/swap',
-        contentType: "text/json",
-        data: JSON.stringify(
-            {
-                'row1': parseInt(lastClickedCell.attr("data-row")),
-                'column1': parseInt(lastClickedCell.attr("data-column")),
-                'row2': parseInt(parentCell.attr("data-row")),
-                'column2': parseInt(parentCell.attr("data-column")),
-            }),
-        success: function (responseTxt) {
-            refresh(JSON.parse(responseTxt));
-        },
-        error: function () {
-            alert("Post Error");
-        },
-    });
-}
-
 function dropdownNavbar() {
     let dropdown = document.getElementsByClassName("dropdown");
 
@@ -182,9 +229,11 @@ function reload() {
     });
 }
 
-function refresh(strategoJson) {
-    let {select: select, field: field, info: info, playerOne: playerOne, playerTwo: playerTwo} = strategoJson;
 
+
+function refresh(strategoJson) {
+    let {select: select, field: field, info: info, playerOne: playerOne, playerTwo: playerTwo, state: stateTemp} = strategoJson;
+    state = stateTemp;
     refreshSelect(select, playerOne, playerTwo);
     refreshField(field, playerOne, playerTwo);
     refreshInfo(info, playerOne, playerTwo);

@@ -75,6 +75,11 @@ public class HomeController extends Controller {
         return refresh();
     }
 
+    public Result reset() {
+        controller.reset();
+        return refresh();
+    }
+
     public Result refresh() {
         return ok(controller.toJson());
     }

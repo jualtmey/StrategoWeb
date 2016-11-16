@@ -7,6 +7,14 @@ let state;
 
 $(function() {
     reload();
+    finishTurn();
+    addMouseClickToNew();
+    addRemoveHoverOnPassableCells();
+    addRemoveHoverOnSelectCell();
+    clickActionsOnFigure();
+});
+
+function finishTurn() {
     let leftMouseButton = 1;
     $(".finishTurn").mouseup(
         function (event) {
@@ -15,10 +23,15 @@ $(function() {
             }
         }
     );
-    addRemoveHoverOnPassableCells();
-    addRemoveHoverOnSelectCell();
-    clickActionsOnFigure();
-});
+}
+
+function addMouseClickToNew() {
+    $(".new").click(
+        function () {
+            newGame();
+        }
+    );
+}
 
 function clickActionsOnFigure() {
     let leftMouseButton = 1;
@@ -175,6 +188,19 @@ function move(parentCell) {
         },
         error: function () {
             alert("Move Post Error");
+        },
+    });
+}
+
+function newGame() {
+    $.ajax({
+        type: "GET",
+        url: '/strategoWui/reset',
+        success: function(responseTxt) {
+            refresh(JSON.parse(responseTxt));
+        },
+        error:  function() {
+            alert("New Get Error");
         },
     });
 }

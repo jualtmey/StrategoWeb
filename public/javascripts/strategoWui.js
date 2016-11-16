@@ -44,7 +44,7 @@ function whichInputIsMade(parentCell, figure) {
             lastClickedCell = undefined;
             removeSelected();
         } else if (lastClickedCell.hasClass("cellBorder")) {
-            // TODO Input r remove
+            remove(lastClickedCell);
             lastClickedCell = undefined;
             removeSelected();
         }
@@ -52,7 +52,6 @@ function whichInputIsMade(parentCell, figure) {
     if (parentCell.hasClass("cellBorder")) {
         if (lastClickedCell === undefined) {
             lastClickedCell = parentCell;
-           // TODO Input r remove save Rank
         } else if (lastClickedCell.hasClass("selectCell")) {
             lastClickedCell = undefined;
             add(parentCell);
@@ -91,6 +90,25 @@ function add(parentCell) {
         });
         addEventCharacterRank = undefined;
     }
+}
+
+function remove(lastCell) {
+    $.ajax({
+        type: "POST",
+        url: '/strategoWui/remove',
+        contentType: "text/json",
+        data: JSON.stringify(
+            {
+                'row': parseInt(lastCell.attr("data-row")),
+                'column': parseInt(lastCell.attr("data-column")),
+            }),
+        success: function (responseTxt) {
+            refresh(JSON.parse(responseTxt));
+        },
+        error: function () {
+            alert("Remove Post Error");
+        },
+    });
 }
 
 function addRemoveHoverOnSelectCell() {

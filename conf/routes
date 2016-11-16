@@ -11,6 +11,7 @@ GET     /strategoWui                controllers.HomeController.strategoWui
 GET     /strategoWui/refresh        controllers.HomeController.refresh
 POST    /strategoWui/add            controllers.HomeController.add
 POST    /strategoWui/swap           controllers.HomeController.swap
+POST    /strategoWui/remove         controllers.HomeController.remove
 
 # An example controller showing a sample home page
 #GET     /                           controllers.HomeController.index

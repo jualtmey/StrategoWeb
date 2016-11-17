@@ -12,6 +12,8 @@ $(function() {
     addRemoveHoverOnPassableCells();
     addRemoveHoverOnSelectCell();
     clickActionsOnFigure();
+    
+    initWebSocket();
 });
 
 function finishTurn() {
@@ -329,7 +331,35 @@ function refreshInfo(info, playerOne, playerTwo) {
     }
 }
 
+// ===== WebSocket =====
 
+let webSocketAddress = "ws://localhost:9000/ws";
+
+function initWebSocket() {
+    websocket = new WebSocket(webSocketAddress);
+    websocket.onopen = function(evt) { onOpen(evt) };
+    websocket.onclose = function(evt) { onClose(evt) };
+    websocket.onmessage = function(evt) { onMessage(evt) };
+    websocket.onerror = function(evt) { onError(evt) };
+}
+
+function onOpen(evt) {
+    alert("CONNECTED");
+    websocket.send("WebSocket rocks");
+}
+
+function onClose(evt) {
+    alert("DISCONNECTED");
+}
+
+function onMessage(evt) {
+    alert("RESPONSE: " + evt.data);
+    websocket.close();
+}
+
+function onError(evt) {
+    alert("ERROR: " + evt.data);
+}
 
 
 

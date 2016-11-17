@@ -17,6 +17,11 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.*;
 
+import akka.actor.*;
+import play.libs.F.*;
+import play.mvc.WebSocket;
+import play.mvc.LegacyWebSocket;
+
 /**
  * This controller contains an action to handle HTTP requests
  * to the application's home page.
@@ -82,6 +87,10 @@ public class HomeController extends Controller {
 
     public Result refresh() {
         return ok(controller.toJson());
+    }
+    
+    public LegacyWebSocket<String> socket() {
+        return WebSocket.withActor(MyWebSocketActor::props);
     }
 
 }

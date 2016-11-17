@@ -16,6 +16,8 @@ POST    /strategoWui/move           controllers.HomeController.move
 GET     /strategoWui/finish         controllers.HomeController.finish
 GET     /strategoWui/reset          controllers.HomeController.reset
 
+GET     /ws                         controllers.HomeController.socket
+
 # An example controller showing a sample home page
 #GET     /                           controllers.HomeController.index
 # An example controller showing how to use dependency injection

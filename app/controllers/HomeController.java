@@ -21,14 +21,22 @@ import akka.actor.*;
 import play.libs.F.*;
 import play.mvc.WebSocket;
 import play.mvc.LegacyWebSocket;
+import javax.inject.*;
 
 /**
  * This controller contains an action to handle HTTP requests
  * to the application's home page.
  */
+@Singleton
 public class HomeController extends Controller {
 
     private IStrategoController controller;
+
+    public static ActorRef lobby;
+    
+    @Inject public HomeController(ActorSystem actorSystem) {
+        lobby = actorSystem.actorOf(LobbyActor.props(actorSystem));
+    }
 
     public Result strategoTui(String command) {
     	TextUI tui = StrategoApp.getInstance().getTui();
@@ -92,5 +100,5 @@ public class HomeController extends Controller {
     public LegacyWebSocket<String> socket() {
         return WebSocket.withActor(MyWebSocketActor::props);
     }
-
+    
 }

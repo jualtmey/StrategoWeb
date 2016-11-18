@@ -333,7 +333,7 @@ function refreshInfo(info, playerOne, playerTwo) {
 
 // ===== WebSocket =====
 
-let webSocketAddress = "ws://localhost:9000/ws";
+let webSocketAddress = "ws://192.168.0.13:9000/ws";
 
 function initWebSocket() {
     websocket = new WebSocket(webSocketAddress);
@@ -345,7 +345,7 @@ function initWebSocket() {
 
 function onOpen(evt) {
     alert("CONNECTED");
-    websocket.send("WebSocket rocks");
+    websocket.send("lobby");
 }
 
 function onClose(evt) {
@@ -353,8 +353,10 @@ function onClose(evt) {
 }
 
 function onMessage(evt) {
-    alert("RESPONSE: " + evt.data);
-    websocket.close();
+    //alert("RESPONSE: " + evt.data);
+    //console.log("ws received " + evt.data);
+    refresh(JSON.parse(evt.data));
+    //websocket.close();
 }
 
 function onError(evt) {

@@ -16,7 +16,19 @@ public class MyWebSocketActor extends UntypedActor {
 
     public void onReceive(Object message) throws Exception {
         if (message instanceof String) {
-            out.tell("I received your message: " + message, self());
+            message = (String) message;
+            if (message.equals("lobby")) {
+                controllers.HomeController.lobby.tell(new LobbyProtocol.Join("unnamed"), self());
+            } else if (message.equals("entered")) {
+                //out.tell("entered lobby", self());
+            } else if (message.equals("new")) {
+                //out.tell("new client in lobby", self());
+            }
+        } else if (message instanceof GameProtocol.Refresh) {
+            GameProtocol.Refresh refresh = (GameProtocol.Refresh) message;
+            out.tell(refresh.json, self());
         }
+        
     }
+
 }

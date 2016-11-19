@@ -98,7 +98,7 @@ public class HomeController extends Controller {
     }
     
     public LegacyWebSocket<String> socket() {
-        return WebSocket.withActor(MyWebSocketActor::props);
+        return WebSocket.withActor(WebSocketActor::props);
     }
     
 }

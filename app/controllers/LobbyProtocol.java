@@ -10,4 +10,8 @@ public final class LobbyProtocol {
         }
     }
     
+    public static final class Leave {
+        
+    }
+    
 }

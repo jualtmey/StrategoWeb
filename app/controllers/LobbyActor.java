@@ -28,6 +28,8 @@ public class LobbyActor extends UntypedActor {
             if (clients.size() == 2) {
                 actorSystem.actorOf(GameActor.props(clients.get(0), clients.get(1)));
             }
+        } else if (message instanceof LobbyProtocol.Leave) {
+            clients.remove(sender());
         }
     }
 

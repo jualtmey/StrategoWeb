@@ -2,23 +2,25 @@ package controllers;
 
 import akka.actor.*;
 
-public class MyWebSocketActor extends UntypedActor {
+public class WebSocketActor extends UntypedActor {
 
     public static Props props(ActorRef out) {
-        return Props.create(MyWebSocketActor.class, out);
+        return Props.create(WebSocketActor.class, out);
     }
 
     private final ActorRef out;
+    private final ActorRef lobby;
 
-    public MyWebSocketActor(ActorRef out) {
+    public WebSocketActor(ActorRef out) {
         this.out = out;
+        this.lobby = controllers.HomeController.lobby;
     }
 
     public void onReceive(Object message) throws Exception {
         if (message instanceof String) {
             message = (String) message;
             if (message.equals("lobby")) {
-                controllers.HomeController.lobby.tell(new LobbyProtocol.Join("unnamed"), self());
+                lobby.tell(new LobbyProtocol.Join("unnamed"), self());
             } else if (message.equals("entered")) {
                 //out.tell("entered lobby", self());
             } else if (message.equals("new")) {
@@ -29,6 +31,11 @@ public class MyWebSocketActor extends UntypedActor {
             out.tell(refresh.json, self());
         }
         
+    }
+    
+    public void postStop() {
+        lobby.tell(new LobbyProtocol.Leave(), self());
+        System.out.println("websocket closed");
     }
 
 }

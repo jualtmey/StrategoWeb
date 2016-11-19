@@ -333,7 +333,7 @@ function refreshInfo(info, playerOne, playerTwo) {
 
 // ===== WebSocket =====
 
-let webSocketAddress = "ws://192.168.0.13:9000/ws";
+let webSocketAddress = "ws://localhost:9000/ws";
 
 function initWebSocket() {
     websocket = new WebSocket(webSocketAddress);

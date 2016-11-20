@@ -71,7 +71,7 @@ public class HomeController extends Controller {
     @BodyParser.Of(BodyParser.Json.class)
     public Result remove() {
         JsonNode json = request().body().asJson();
-        controller.removeNotify(json.findPath("column").intValue(), json.findPath("row").intValue());
+        controller.remove(json.findPath("column").intValue(), json.findPath("row").intValue());
         return refresh();
     }
 

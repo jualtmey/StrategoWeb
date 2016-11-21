@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import de.htwg.stratego.controller.ISingelDeviceStrategoController;
 import play.libs.Json;
 import de.htwg.stratego.StrategoApp;
 import de.htwg.stratego.aview.tui.TextUI;
@@ -30,7 +31,7 @@ import javax.inject.*;
 @Singleton
 public class HomeController extends Controller {
 
-    private IStrategoController controller;
+    private ISingelDeviceStrategoController controller;
 
     public static ActorRef lobby;
     
@@ -84,7 +85,7 @@ public class HomeController extends Controller {
     }
 
     public Result finish() {
-        controller.changeStateNotify();
+        controller.finish();
         return refresh();
     }
 

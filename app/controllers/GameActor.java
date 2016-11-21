@@ -6,6 +6,8 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import de.htwg.stratego.StrategoModule;
 
+import de.htwg.stratego.controller.IMultiDeviceStrategoController;
+import de.htwg.stratego.controller.ISingelDeviceStrategoController;
 import de.htwg.stratego.controller.IStrategoController;
 
 public class GameActor extends UntypedActor {
@@ -17,11 +19,11 @@ public class GameActor extends UntypedActor {
     private ActorRef playerOne;
     private ActorRef playerTwo;
 
-    private IStrategoController strategoController;
+    private IMultiDeviceStrategoController strategoController;
 
     public GameActor(ActorRef playerOne, ActorRef playerTwo) {
         Injector injector = Guice.createInjector(new StrategoModule());
-		strategoController = injector.getInstance(IStrategoController.class);
+		strategoController = injector.getInstance(IMultiDeviceStrategoController.class);
 		
 		this.playerOne = playerOne;
 		this.playerTwo = playerTwo;
@@ -32,9 +34,9 @@ public class GameActor extends UntypedActor {
     public void onReceive(Object message) throws Exception {
         if (message instanceof GameProtocol.Add) {
             GameProtocol.Add add = (GameProtocol.Add) message;
-            strategoController.add(add.column, add.row, add.rank);
-            playerOne.tell(new GameProtocol.Refresh(strategoController.toJson()), self());
-            playerTwo.tell(new GameProtocol.Refresh(strategoController.toJson()), self());
+            strategoController.add(add.column, add.row, add.rank, strategoController.getPlayerOne());
+            playerOne.tell(new GameProtocol.Refresh(strategoController.toJson(strategoController.getPlayerOne())), self());
+            playerTwo.tell(new GameProtocol.Refresh(strategoController.toJson(strategoController.getPlayerTwo())), self());
         }
     }
 

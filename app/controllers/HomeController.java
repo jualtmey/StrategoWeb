@@ -1,28 +1,16 @@
 package controllers;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import de.htwg.stratego.controller.ISingelDeviceStrategoController;
-import play.libs.Json;
 import de.htwg.stratego.StrategoApp;
 import de.htwg.stratego.aview.tui.TextUI;
-import de.htwg.stratego.controller.IStrategoController;
-import de.htwg.stratego.model.ICell;
+import de.htwg.stratego.controller.ISingelDeviceStrategoController;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.*;
+import views.html.strategoIndex;
+import views.html.strategoWui;
 
-import akka.actor.*;
-import play.libs.F.*;
-import play.mvc.WebSocket;
-import play.mvc.LegacyWebSocket;
-import javax.inject.*;
+import javax.inject.Singleton;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -32,12 +20,6 @@ import javax.inject.*;
 public class HomeController extends Controller {
 
     private ISingelDeviceStrategoController controller;
-
-    public static ActorRef lobby;
-    
-    @Inject public HomeController(ActorSystem actorSystem) {
-        lobby = actorSystem.actorOf(LobbyActor.props(actorSystem));
-    }
 
     public Result strategoTui(String command) {
     	TextUI tui = StrategoApp.getInstance().getTui();
@@ -96,10 +78,6 @@ public class HomeController extends Controller {
 
     public Result refresh() {
         return ok(controller.toJson());
-    }
-    
-    public LegacyWebSocket<String> socket() {
-        return WebSocket.withActor(WebSocketActor::props);
     }
     
 }

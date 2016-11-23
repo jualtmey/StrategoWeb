@@ -4,9 +4,39 @@ let addEventCharacterRank;
 let lastClickedCell;
 let state;
 
+let websocket;
+let webSocketAddress = "ws://localhost:9000/ws";
+
+function initWebSocket() {
+    websocket = new WebSocket(webSocketAddress);
+    websocket.onopen = function(evt) { onOpen(evt) };
+    websocket.onclose = function(evt) { onClose(evt) };
+    websocket.onmessage = function(evt) { onMessage(evt) };
+    websocket.onerror = function(evt) { onError(evt) };
+}
+
+function onOpen(evt) {
+    alert("CONNECTED");
+    let json = {'command': "lobby"};
+    websocket.send(JSON.stringify(json));
+}
+
+function onClose(evt) {
+    alert("DISCONNECTED");
+}
+
+function onMessage(evt) {
+    //alert("RESPONSE: " + evt.data);
+    //console.log("ws received " + evt.data);
+    refresh(JSON.parse(evt.data));
+    //websocket.close();
+}
+
+function onError(evt) {
+    alert("ERROR: " + evt.data);
+}
 
 $(function() {
-    reload();
     finishTurn();
     addMouseClickToNew();
     addRemoveHoverOnPassableCells();
@@ -82,6 +112,7 @@ function whichInputIsMade(parentCell, figure) {
             add(parentCell);
             removeSelected();
         } else if (lastClickedCell.hasClass("cellBorder")) {
+            console.log(state);
             if (state === "start") {
                 swap(parentCell);
             } else if (state === "turn") {
@@ -99,99 +130,53 @@ function removeSelected() {
 
 function add(parentCell) {
     if (addEventCharacterRank !== undefined) {
-        $.ajax({
-            type: "POST",
-            url: '/strategoWui/add',
-            contentType: "text/json",
-            data: JSON.stringify(
-                {
-                    'row': parseInt(parentCell.attr("data-row")),
-                    'column': parseInt(parentCell.attr("data-column")),
-                    'rank': parseInt(addEventCharacterRank)
-                }),
-            success: function (responseTxt) {
-                refresh(JSON.parse(responseTxt));
-            },
-            error: function () {
-                alert("Post Error");
-            },
-        });
+        let json = {
+            'command': "add",
+            'row': parseInt(parentCell.attr("data-row")),
+            'column': parseInt(parentCell.attr("data-column")),
+            'rank': parseInt(addEventCharacterRank)
+        };
+        console.log(json.command);
+        websocket.send(JSON.stringify(json));
         addEventCharacterRank = undefined;
     }
 }
 
 function remove(lastCell) {
-    $.ajax({
-        type: "POST",
-        url: '/strategoWui/remove',
-        contentType: "text/json",
-        data: JSON.stringify(
-            {
-                'row': parseInt(lastCell.attr("data-row")),
-                'column': parseInt(lastCell.attr("data-column")),
-            }),
-        success: function (responseTxt) {
-            refresh(JSON.parse(responseTxt));
-        },
-        error: function () {
-            alert("Remove Post Error");
-        },
-    });
+    let json = {
+        'command': "remove",
+        'row': parseInt(lastCell.attr("data-row")),
+        'column': parseInt(lastCell.attr("data-column"))
+    };
+    websocket.send(JSON.stringify(json));
 }
 
 function swap(parentCell) {
-    $.ajax({
-        type: "POST",
-        url: '/strategoWui/swap',
-        contentType: "text/json",
-        data: JSON.stringify(
-            {
-                'row1': parseInt(lastClickedCell.attr("data-row")),
-                'column1': parseInt(lastClickedCell.attr("data-column")),
-                'row2': parseInt(parentCell.attr("data-row")),
-                'column2': parseInt(parentCell.attr("data-column")),
-            }),
-        success: function (responseTxt) {
-            refresh(JSON.parse(responseTxt));
-        },
-        error: function () {
-            alert("Swap Post Error");
-        },
-    });
+    let json = {
+        'command': "swap",
+        'fromRow': parseInt(lastClickedCell.attr("data-row")),
+        'fromColumn': parseInt(lastClickedCell.attr("data-column")),
+        'toRow': parseInt(parentCell.attr("data-row")),
+        'toColumn': parseInt(parentCell.attr("data-column"))
+    };
+    websocket.send(JSON.stringify(json));
 }
 
 function finish() {
-    $.ajax({
-        type: "GET",
-        url: '/strategoWui/finish',
-        success: function(responseTxt) {
-            refresh(JSON.parse(responseTxt));
-        },
-        error:  function() {
-            alert("Finish Get Error");
-        },
-    });
+    let json = {'command': "finish"};
+    websocket.send(JSON.stringify(json));
 }
 
 function move(parentCell) {
-    $.ajax({
-        type: "POST",
-        url: '/strategoWui/move',
-        contentType: "text/json",
-        data: JSON.stringify(
-            {
-                'rowFrom': parseInt(lastClickedCell.attr("data-row")),
-                'columnFrom': parseInt(lastClickedCell.attr("data-column")),
-                'rowTo': parseInt(parentCell.attr("data-row")),
-                'columnTo': parseInt(parentCell.attr("data-column")),
-            }),
-        success: function (responseTxt) {
-            refresh(JSON.parse(responseTxt));
-        },
-        error: function () {
-            alert("Move Post Error");
-        },
-    });
+    let json = {
+        'command': "move",
+        'fromRow': parseInt(lastClickedCell.attr("data-row")),
+        'fromColumn': parseInt(lastClickedCell.attr("data-column")),
+        'toRow': parseInt(parentCell.attr("data-row")),
+        'toColumn': parseInt(parentCell.attr("data-column"))
+    };
+    console.log("move");
+    websocket.send(JSON.stringify(json));
 }
 
 function newGame() {
@@ -242,19 +227,6 @@ function dropdownNavbar() {
         this.classList.toggle("open");
     }
     Array.from(dropdown).forEach(e => e.addEventListener('click', setOpenClass));
-}
-
-function reload() {
-    $.ajax({
-        type: "GET",
-        url: '/strategoWui/refresh',
-        success: function(responseTxt) {
-            refresh(JSON.parse(responseTxt));
-        },
-        error:  function() {
-            alert("Get Error");
-        },
-    });
 }
 
 

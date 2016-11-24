@@ -25,6 +25,7 @@ public class LobbyActor extends UntypedActor {
             
             if (clients.size() == 2) {
                 ActorRef game = actorSystem.actorOf(GameActor.props(clients.get(0), clients.get(1)));
+                game.tell(new GameProtocol.NewGame(), self());
                 clients.get(0).tell(new LobbyProtocol.NewGame(game), self());
                 clients.get(1).tell(new LobbyProtocol.NewGame(game), self());
             }

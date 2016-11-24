@@ -2,6 +2,10 @@ package actors;
 
 public final class GameProtocol {
     
+    public static final class NewGame {
+
+    }
+    
     public static final class Add {
         public final int row;
         public final int column;

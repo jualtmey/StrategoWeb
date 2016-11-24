@@ -175,21 +175,12 @@ function move(parentCell) {
         'toRow': parseInt(parentCell.attr("data-row")),
         'toColumn': parseInt(parentCell.attr("data-column"))
     };
-    console.log("move");
     websocket.send(JSON.stringify(json));
 }
 
 function newGame() {
-    $.ajax({
-        type: "GET",
-        url: '/strategoWui/reset',
-        success: function(responseTxt) {
-            refresh(JSON.parse(responseTxt));
-        },
-        error:  function() {
-            alert("New Get Error");
-        },
-    });
+    let json = {'command': "new"};
+    websocket.send(JSON.stringify(json));
 }
 
 function addRemoveHoverOnSelectCell() {

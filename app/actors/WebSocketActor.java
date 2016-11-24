@@ -28,6 +28,8 @@ public class WebSocketActor extends UntypedActor {
 
             if ("lobby".equals(command)) {
                 lobby.tell(new LobbyProtocol.Join("unnamed"), self());
+            } else if ("new".equals(command)) {
+                game.tell(new GameProtocol.NewGame(), self());
             } else if ("add".equals(command)) {
                 int row = jsonMessage.findPath("row").intValue();
                 int column = jsonMessage.findPath("column").intValue();

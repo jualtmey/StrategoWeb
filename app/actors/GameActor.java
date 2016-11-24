@@ -21,44 +21,55 @@ public class GameActor extends UntypedActor {
     private IMultiDeviceStrategoController strategoController;
 
     public GameActor(ActorRef playerOne, ActorRef playerTwo) {
-        Injector injector = Guice.createInjector(new StrategoModule());
-		strategoController = injector.getInstance(IMultiDeviceStrategoController.class);
-		
 		this.playerOne = playerOne;
 		this.playerTwo = playerTwo;
     }
 
     public void onReceive(Object message) throws Exception {
-        IPlayer player;
-        if (playerOne.equals(sender())) {
-            player = strategoController.getPlayerOne();
+        if (message instanceof GameProtocol.NewGame) {
+            newGame();
+            notifyPlayer();
+        }
+
+        if (strategoController != null) {
+            IPlayer player;
+            if (playerOne.equals(sender())) {
+                player = strategoController.getPlayerOne();
+            } else {
+                player = strategoController.getPlayerTwo();
+            }
+
+            if (message instanceof GameProtocol.Add) {
+                GameProtocol.Add add = (GameProtocol.Add) message;
+                strategoController.add(add.column, add.row, add.rank, player);
+                notifyPlayer();
+            } else if (message instanceof GameProtocol.Swap) {
+                GameProtocol.Swap swap = (GameProtocol.Swap) message;
+                strategoController.swap(swap.fromColumn, swap.fromRow, swap.toColumn, swap.toRow, player);
+                notifyPlayer();
+            } else if (message instanceof GameProtocol.Remove) {
+                GameProtocol.Remove remove = (GameProtocol.Remove) message;
+                strategoController.remove(remove.column, remove.row, player);
+                notifyPlayer();
+            } else if (message instanceof GameProtocol.Move) {
+                GameProtocol.Move move = (GameProtocol.Move) message;
+                strategoController.move(move.fromColumn, move.fromRow, move.toColumn, move.toRow, player);
+                notifyPlayer();
+            } else if (message instanceof GameProtocol.Finish) {
+                strategoController.finish(player);
+                notifyPlayer();
+            }
+        }
+
+    }
+    
+    private void newGame() {
+        if (strategoController == null) {
+            Injector injector = Guice.createInjector(new StrategoModule());
+		    strategoController = injector.getInstance(IMultiDeviceStrategoController.class);
         } else {
-            player = strategoController.getPlayerTwo();
+            strategoController.reset();
         }
-
-        System.out.println(strategoController.getStatusString());
-
-        if (message instanceof GameProtocol.Add) {
-            GameProtocol.Add add = (GameProtocol.Add) message;
-            strategoController.add(add.column, add.row, add.rank, player);
-            notifyPlayer();
-        } else if (message instanceof GameProtocol.Swap) {
-            GameProtocol.Swap swap = (GameProtocol.Swap) message;
-            strategoController.swap(swap.fromColumn, swap.fromRow, swap.toColumn, swap.toRow, player);
-            notifyPlayer();
-        } else if (message instanceof GameProtocol.Remove) {
-            GameProtocol.Remove remove = (GameProtocol.Remove) message;
-            strategoController.remove(remove.column, remove.row, player);
-            notifyPlayer();
-        } else if (message instanceof GameProtocol.Move) {
-            GameProtocol.Move move = (GameProtocol.Move) message;
-            strategoController.move(move.fromColumn, move.fromRow, move.toColumn, move.toRow, player);
-            notifyPlayer();
-        } else if (message instanceof GameProtocol.Finish) {
-            strategoController.finish(player);
-            notifyPlayer();
-        }
-
     }
 
     private void notifyPlayer() {

@@ -255,28 +255,30 @@ function refreshSelect(select, playerOne, playerTwo) {
 }
 
 function refreshField(field, playerOne, playerTwo) {
-    field.innerField.forEach(item => {
-        let cell = $(".cellBorder[data-row='" + item.row + "'][data-column='" + item.column+ "'] .figure")
-        if (item.containsCharacter) {
-            let character = item.character;
-            if(character.player === playerOne) {
-                cell.addClass("player1");
-                cell.removeClass("player2");
-            }
-            if(character.player === playerTwo) {
-                cell.addClass("player2");
-                cell.removeClass("player1");
-            }
-            if (character.isVisible) {
-                cell.attr('src', 'assets/images/figures/' + character.rank + '.svg');
+    field.innerField.forEach(rowField => {
+        rowField.cells.forEach(item => {
+            let cell = $(".cellBorder[data-row='" + item.row + "'][data-column='" + item.column+ "'] .figure")
+            if (item.containsCharacter) {
+                let character = item.character;
+                if(character.player === playerOne) {
+                    cell.addClass("player1");
+                    cell.removeClass("player2");
+                }
+                if(character.player === playerTwo) {
+                    cell.addClass("player2");
+                    cell.removeClass("player1");
+                }
+                if (character.isVisible) {
+                    cell.attr('src', 'assets/images/figures/' + character.rank + '.svg');
+                } else {
+                    cell.attr('src', 'assets/images/figures/notVisible.svg');
+                }
             } else {
-                cell.attr('src', 'assets/images/figures/notVisible.svg');
+                cell.removeClass("player1");
+                cell.removeClass("player2");
+                cell.attr('src', 'assets/images/figures/empty.svg');
             }
-        } else {
-            cell.removeClass("player1");
-            cell.removeClass("player2");
-            cell.attr('src', 'assets/images/figures/empty.svg');
-        }
+        });
     });
 }
 

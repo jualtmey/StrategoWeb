@@ -5,7 +5,7 @@ let lastClickedCell;
 let state;
 
 let websocket;
-let webSocketAddress = "ws://localhost:9000/ws";
+let webSocketAddress = "wss://strategowebapp.herokuapp.com/ws";
 
 function initWebSocket() {
     websocket = new WebSocket(webSocketAddress);

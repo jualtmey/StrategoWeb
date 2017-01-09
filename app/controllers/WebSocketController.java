@@ -8,6 +8,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import de.htwg.stratego.StrategoModule;
 import de.htwg.stratego.controller.IMultiDeviceStrategoController;
+import org.pac4j.play.java.Secure;
 import play.mvc.Controller;
 import play.mvc.LegacyWebSocket;
 import play.mvc.Result;
@@ -35,5 +36,10 @@ public class WebSocketController extends Controller {
     public LegacyWebSocket<String> socket() {
         return WebSocket.withActor(WebSocketActor::props);
     }
-    
+
+    @Secure(clients = "OidcClient")
+    public Result lobby() {
+        System.out.println("<<<<<<<<<. - .>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<lobby wurde aufgerufen!!! TEST"); // TODO test
+        return ok(views.html.lobby.render());
+    }
 }

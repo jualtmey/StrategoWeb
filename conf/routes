@@ -19,6 +19,8 @@ GET     /strategoWui/reset          controllers.HomeController.reset
 GET     /strategoWuiSocket          controllers.WebSocketController.strategoWui
 GET     /ws                         controllers.WebSocketController.socket
 
+GET     /strategoLobby              controllers.WebSocketController.lobby
+
 # An example controller showing a sample home page
 #GET     /                           controllers.HomeController.index
 # An example controller showing how to use dependency injection

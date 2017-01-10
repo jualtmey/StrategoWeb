@@ -13,7 +13,6 @@ import play.mvc.Controller;
 import play.mvc.LegacyWebSocket;
 import play.mvc.Result;
 import play.mvc.WebSocket;
-import views.html.strategoWuiWebsocket;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -30,7 +29,7 @@ public class WebSocketController extends Controller {
     public Result strategoWui() {
         Injector injector = Guice.createInjector(new StrategoModule());
         IMultiDeviceStrategoController strategoController = injector.getInstance(IMultiDeviceStrategoController.class);
-        return ok(strategoWuiWebsocket.render(strategoController));
+        return ok(views.html.strategoWuiWebsocket.render(strategoController));
     }
 
     public LegacyWebSocket<String> socket() {

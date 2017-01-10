@@ -7,8 +7,6 @@ import de.htwg.stratego.controller.ISingelDeviceStrategoController;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.strategoIndex;
-import views.html.strategoWui;
 
 import javax.inject.Singleton;
 
@@ -28,12 +26,12 @@ public class HomeController extends Controller {
     }
 
     public Result strategoIndex() {
-        return ok(strategoIndex.render());
+        return ok(views.html.strategoIndex.render());
     }
 
     public Result strategoWui() {
         controller = StrategoApp.getInstance().getIStrategoController();
-        return ok(strategoWui.render(controller));
+        return ok(views.html.strategoWui.render(controller));
     }
 
     @BodyParser.Of(BodyParser.Json.class)

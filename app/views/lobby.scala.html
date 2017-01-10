@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+@(profileList: java.util.List[org.pac4j.core.profile.CommonProfile])
+
 <html>
 
     <head>
@@ -8,7 +9,12 @@
 
     <body>
         das ist die lobby.
-
+        <br /><br />
+        <<<<<<<<<<<<<
+        @profileList.get(0).getDisplayName
+            >>>>>>>>>>>>
+        @profileList.get(0).getEmail
+        >>>>>>>>>>>>
     </body>
 
 </html>

@@ -20,6 +20,8 @@ GET     /strategoWuiSocket          controllers.WebSocketController.strategoWui
 GET     /ws                         controllers.WebSocketController.socket
 
 GET     /strategoLobby              controllers.WebSocketController.lobby
+GET     /callback                   @org.pac4j.play.CallbackController.callback()
+GET     /logout                     @org.pac4j.play.ApplicationLogoutController.logout()
 
 # An example controller showing a sample home page
 #GET     /                           controllers.HomeController.index

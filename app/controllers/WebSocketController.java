@@ -42,7 +42,7 @@ public class WebSocketController extends Controller {
     }
 
     public LegacyWebSocket<String> socket() {
-        return WebSocket.withActor(WebSocketActor::props);
+        return WebSocket.withActor((out) -> WebSocketActor.props(out, "hans"));
     }
 
     @Secure(clients = "OidcClient")
@@ -54,6 +54,7 @@ public class WebSocketController extends Controller {
     private List<CommonProfile> getProfiles() {
         final PlayWebContext context = new PlayWebContext(ctx(), playSessionStore);
         final ProfileManager<CommonProfile> profileManager = new ProfileManager(context);
+        System.out.println(profileManager.get(true));ß
         return profileManager.getAll(true);
     }
 }

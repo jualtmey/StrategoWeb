@@ -6,17 +6,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class WebSocketActor extends UntypedActor {
 
-    public static Props props(ActorRef out) {
-        return Props.create(WebSocketActor.class, out);
+    public static Props props(ActorRef out, String name) {
+        return Props.create(WebSocketActor.class, out, name);
     }
 
     private final ActorRef out;
     private final ActorRef lobby;
     private ActorRef game;
+    private String name;
 
-    public WebSocketActor(ActorRef out) {
+    public WebSocketActor(ActorRef out, String name) {
         this.out = out;
+        this.name = name;
         this.lobby = controllers.WebSocketController.lobby;
+        System.out.println("Name: " + name);
     }
 
     public void onReceive(Object message) throws Exception {

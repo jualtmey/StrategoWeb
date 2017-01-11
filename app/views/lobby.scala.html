@@ -1,9 +1,10 @@
-@(profileList: java.util.List[org.pac4j.core.profile.CommonProfile])
-
 <html>
 
     <head>
         <title>Lobby</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src="@routes.Assets.versioned("javascripts/lobby.js")" ></script>
 
     </head>
 
@@ -11,11 +12,8 @@
         das ist die lobby.
         <br /><br />
         <<<<<<<<<<<<<
-        @profileList.get(0).getDisplayName
             >>>>>>>>>>>>
-        @profileList.get(0).getEmail
         >>>>>>>>>>>>
-        @profileList
     </body>
 
 </html>

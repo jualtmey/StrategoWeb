@@ -6,7 +6,7 @@ let state;
 
 let websocket;
 let webSocketAddress = "wss://strategoweb.herokuapp.com/ws";
-//let webSocketAddress = "ws://localhost:9000/ws";
+// let webSocketAddress = "ws://localhost:9000/ws";
 
 function initWebSocket() {
     websocket = new WebSocket(webSocketAddress);

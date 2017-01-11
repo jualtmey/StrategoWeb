@@ -3,23 +3,22 @@ package actors;
 import akka.actor.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.pac4j.core.profile.CommonProfile;
 
 public class WebSocketActor extends UntypedActor {
 
-    public static Props props(ActorRef out, String name) {
-        return Props.create(WebSocketActor.class, out, name);
+    public static Props props(ActorRef out, CommonProfile profile) {
+        return Props.create(WebSocketActor.class, out, profile);
     }
 
     private final ActorRef out;
     private final ActorRef lobby;
     private ActorRef game;
-    private String name;
 
-    public WebSocketActor(ActorRef out, String name) {
+    public WebSocketActor(ActorRef out, CommonProfile profile) {
         this.out = out;
-        this.name = name;
         this.lobby = controllers.WebSocketController.lobby;
-        System.out.println("Name: " + name);
+        lobby.tell(new LobbyProtocol.Join(profile), self());
     }
 
     public void onReceive(Object message) throws Exception {
@@ -29,8 +28,8 @@ public class WebSocketActor extends UntypedActor {
 
             String command = jsonMessage.findPath("command").textValue();
 
-            if ("lobby".equals(command)) {
-                lobby.tell(new LobbyProtocol.Join("unnamed"), self());
+            if ("lobby-join".equals(command)) {
+                // TODO: unnötig
             } else if ("new".equals(command)) {
                 game.tell(new GameProtocol.NewGame(), self());
             } else if ("add".equals(command)) {
@@ -57,17 +56,12 @@ public class WebSocketActor extends UntypedActor {
             } else if ("finish".equals(command)) {
                 game.tell(new GameProtocol.Finish(), self());
             }
-
-//            if (message.equals("lobby")) {
-//
-//            } else if (message.equals("entered")) {
-//                //out.tell("entered lobby", self());
-//            } else if (message.equals("new")) {
-//                //out.tell("new client in lobby", self());
-//            }
         } else if (message instanceof LobbyProtocol.NewGame) {
             LobbyProtocol.NewGame newGame = (LobbyProtocol.NewGame) message;
             game = newGame.game;
+        } else if (message instanceof LobbyProtocol.Refresh) {
+            LobbyProtocol.Refresh refresh = (LobbyProtocol.Refresh) message;
+            out.tell(refresh.json, self());
         } else if (message instanceof GameProtocol.Refresh) {
             GameProtocol.Refresh refresh = (GameProtocol.Refresh) message;
             out.tell(refresh.json, self());

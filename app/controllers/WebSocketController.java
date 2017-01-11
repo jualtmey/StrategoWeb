@@ -13,19 +13,19 @@ import org.pac4j.core.profile.ProfileManager;
 import org.pac4j.play.PlayWebContext;
 import org.pac4j.play.java.Secure;
 import org.pac4j.play.store.PlaySessionStore;
-import play.mvc.Controller;
-import play.mvc.LegacyWebSocket;
-import play.mvc.Result;
-import play.mvc.WebSocket;
+import play.api.mvc.RequestHeader;
+import play.mvc.*;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.net.HttpCookie;
 import java.util.List;
 
 @Singleton
 public class WebSocketController extends Controller {
 
     public static ActorRef lobby;
+    private Http.Context lastContext;
 
     @Inject
     public WebSocketController(ActorSystem actorSystem) {
@@ -41,20 +41,21 @@ public class WebSocketController extends Controller {
         return ok(views.html.strategoWuiWebsocket.render(strategoController));
     }
 
+    @Secure(clients = "OidcClient")
     public LegacyWebSocket<String> socket() {
-        return WebSocket.withActor((out) -> WebSocketActor.props(out, "hans"));
+        LegacyWebSocket socket = WebSocket.withActor((out) -> WebSocketActor.props(out, getProfile(lastContext)));
+        return socket;
     }
 
     @Secure(clients = "OidcClient")
     public Result lobby() {
-        System.out.println("<<<<<<<<<. - .>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<lobby wurde aufgerufen!!! TEST"); // TODO test
-        return ok(views.html.lobby.render(getProfiles()));
+        lastContext = new Http.Context(request());
+        return ok(views.html.lobby.render());
     }
 
-    private List<CommonProfile> getProfiles() {
-        final PlayWebContext context = new PlayWebContext(ctx(), playSessionStore);
+    private CommonProfile getProfile(Http.Context ctx) {
+        final PlayWebContext context = new PlayWebContext(ctx, playSessionStore);
         final ProfileManager<CommonProfile> profileManager = new ProfileManager(context);
-        System.out.println(profileManager.get(true));
-        return profileManager.getAll(true);
+        return profileManager.get(true).get();
     }
 }

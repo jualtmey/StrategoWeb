@@ -54,7 +54,7 @@ public class WebSocketController extends Controller {
     private List<CommonProfile> getProfiles() {
         final PlayWebContext context = new PlayWebContext(ctx(), playSessionStore);
         final ProfileManager<CommonProfile> profileManager = new ProfileManager(context);
-        System.out.println(profileManager.get(true));ß
+        System.out.println(profileManager.get(true));
         return profileManager.getAll(true);
     }
 }
